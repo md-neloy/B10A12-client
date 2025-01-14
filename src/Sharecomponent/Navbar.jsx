@@ -60,7 +60,9 @@ const Navbar = () => {
   return (
     <div
       className={`${
-        scrollPosition > 100 ? "sticky top-0 z-10 " : "static"
+        scrollPosition > 100
+          ? "sticky top-0 z-10 opacity-90 "
+          : "static opacity-100"
       } bg-[#212529] h-fit transition-all`}
     >
       <Container>

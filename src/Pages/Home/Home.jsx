@@ -1,5 +1,8 @@
 import Banner from "./Banner";
+import Community from "./Community";
 import Partners from "./Partners";
+import Question from "./Question";
+import RivewCard from "./RivewCard";
 import TopEnroll from "./TopEnroll";
 
 const Home = () => {
@@ -8,6 +11,9 @@ const Home = () => {
       <Banner />
       <Partners />
       <TopEnroll />
+      <RivewCard />
+      <Community />
+      <Question />
     </div>
   );
 };

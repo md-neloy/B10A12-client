@@ -1,8 +1,12 @@
+import Container from "../../Sharecomponent/Container";
+
 const AllClasses = () => {
   return (
-    <div>
-      <h3>All classes</h3>
-    </div>
+    <Container>
+      <div>
+        <h3>All classes</h3>
+      </div>
+    </Container>
   );
 };
 

@@ -10,9 +10,9 @@ const Partners = () => {
   return (
     <div>
       <Container>
-        <div className="my-8 md:my-24">
+        <div className="my-8 md:mt-10">
           <SectionHeader title={"Trusted Companies"} />
-          <div className="flex items-center flex-wrap gap-4">
+          <div className="flex items-center flex-wrap gap-4 mt-3">
             <img
               className="w-20 md:w-28 block mx-auto"
               src={geeks}
