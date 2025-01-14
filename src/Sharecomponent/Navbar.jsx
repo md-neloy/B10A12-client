@@ -19,9 +19,9 @@ const Navbar = () => {
     setTogol(!togol);
   };
   return (
-    <>
+    <div className="sticky top-0 z-10">
       <Container>
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 ">
           <div className="navbar-start">
             <div className="dropdown">
               <div
@@ -137,7 +137,7 @@ const Navbar = () => {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 
