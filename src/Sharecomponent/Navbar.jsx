@@ -3,25 +3,69 @@ import Container from "./Container";
 import logo3 from "../assets/3.png";
 import useContexHooks from "../useHooks/useContexHooks";
 import { FaUserAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
 const Navbar = () => {
+  const [scrollPosition, setScrollPosition] = useState(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+      console.log(scrollPosition);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+  }, [scrollPosition]);
   const list = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              : "text-white hover:text-yellow-400 font-bold"
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink>All Classes</NavLink>
+        <NavLink
+          to="/allclasses"
+          className={({ isActive }) =>
+            isActive
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              : "text-white hover:text-yellow-400 font-bold"
+          }
+        >
+          All Classes
+        </NavLink>
+      </li>
+      <li to="">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              : "text-white hover:text-yellow-400 font-bold"
+          }
+        >
+          Tech on SmartLearning
+        </NavLink>
       </li>
     </>
   );
-  const { user, logout, togol, setTogol } = useContexHooks();
+  const { user, logOut, togol, setTogol } = useContexHooks();
   const handleChange = () => {
     setTogol(!togol);
   };
   return (
-    <div className="sticky top-0 z-10">
+    <div
+      className={`${
+        scrollPosition > 100 ? "sticky top-0 z-10 " : "static"
+      } bg-[#212529] h-fit transition-all`}
+    >
       <Container>
-        <div className="navbar bg-base-100 ">
+        <div className="navbar  text-white ">
           <div className="navbar-start">
             <div className="dropdown">
               <div
@@ -82,8 +126,13 @@ const Navbar = () => {
                   <div className="absolute w-4 h-4 rotate-45 bg-blue-400 -top-2 left-1/2 -translate-x-1/2"></div>
                   <div className="text-sm p-2 text-center">
                     <p>{user.displayName || "Anonymous User"}</p>
+                    <ul className="menu menu-vertical">
+                      <li>
+                        <NavLink>Dashboard</NavLink>
+                      </li>
+                    </ul>
                     <button
-                      onClick={logout}
+                      onClick={logOut}
                       className="btn btn-sm mt-2 bg-red-500 text-white"
                     >
                       Log Out
@@ -94,18 +143,20 @@ const Navbar = () => {
             ) : (
               // Conditional Links for Non-Logged-In Users
               <>
-                <Link
-                  to="/signIn"
-                  className="btn btn-sm bg-blue-500 text-white"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/register"
-                  className="btn btn-sm bg-green-500 text-white"
-                >
-                  Register
-                </Link>
+                <div className="flex gap-3">
+                  <Link
+                    to="/signIn"
+                    className="btn btn-sm bg-blue-500 text-white"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="btn btn-sm bg-green-500 text-white"
+                  >
+                    Register
+                  </Link>
+                </div>
               </>
             )}
             <div>

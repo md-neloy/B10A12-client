@@ -4,6 +4,7 @@ import ErrorPage from "../Sharecomponent/ErrorPage";
 import Home from "../Pages/Home/Home";
 import SignIn from "../Pages/signIn/SignIn";
 import Register from "../Pages/register/Register";
+import AllClasses from "../Pages/AllClasses/AllClasses";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/allclasses",
+        element: <AllClasses />,
       },
       {
         path: "/signIn",
