@@ -15,8 +15,10 @@ import { useState } from "react";
 
 const Banner = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   return (
-    <div className="">
+    <div className="w-full">
+      {/* Main Banner Swiper */}
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -27,7 +29,7 @@ const Banner = () => {
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2 md:h-[400px]"
+        className="mySwiper2 h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]"
       >
         {[
           banner1,
@@ -43,27 +45,28 @@ const Banner = () => {
             <img
               src={img}
               alt={`Banner ${index + 1}`}
-              className="w-full h-[250px] sm:h-[400px] md:h-[400px]  object-cover"
+              className="w-full h-full object-cover"
             />
           </SwiperSlide>
         ))}
       </Swiper>
 
       {/* Thumbnail Swiper */}
-      <div className="flex justify-center items-center mt-4">
+      <div className="hidden md:flex md:justify-center md:items-center mt-4">
         <Swiper
           onSwiper={setThumbsSwiper}
           loop={true}
           spaceBetween={10}
           breakpoints={{
-            640: { slidesPerView: 3 },
+            320: { slidesPerView: 2 }, // For very small screens
+            480: { slidesPerView: 3 },
             768: { slidesPerView: 4 },
             1024: { slidesPerView: 5 },
           }}
           freeMode={true}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper h-16"
+          className="mySwiper h-16 sm:h-20"
         >
           {[
             banner1,
@@ -82,7 +85,7 @@ const Banner = () => {
               <img
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className="w-16 sm:w-20 h-full object-cover rounded-md"
+                className="w-12 sm:w-16 md:w-20 h-full object-cover rounded-md"
               />
             </SwiperSlide>
           ))}

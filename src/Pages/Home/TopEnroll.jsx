@@ -20,8 +20,14 @@ const TopEnroll = () => {
   } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/classes");
-      return res.data;
+      try {
+        const res = await axiosPublic.get("/classes");
+        return res.data;
+      } catch (err) {
+        throw new Error(
+          err.response?.data?.message || "Failed to fetch classes."
+        );
+      }
     },
   });
 
@@ -29,7 +35,11 @@ const TopEnroll = () => {
     return <PreLoader />;
   }
   if (error) {
-    return <p className="text-2xl text-red-500">{error}</p>;
+    return (
+      <p className="text-2xl text-red-500">
+        {error || "An unknown error occurred."}
+      </p>
+    );
   }
 
   return (

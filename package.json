@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.64.1",
     "@tanstack/react-router": "^1.95.6",
+    "aos": "^2.3.4",
     "axios": "^1.7.9",
     "firebase": "^11.1.0",
     "lottie-react": "^2.4.0",
