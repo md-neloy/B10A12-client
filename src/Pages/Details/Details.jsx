@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { FaChalkboardTeacher, FaDollarSign } from "react-icons/fa";
@@ -83,12 +83,13 @@ const Details = () => {
                 </div>
               )}
               {/* Payment Button */}
-              <button
+              <Link
+                to={`/payment/${price}`}
                 onClick={handlePayment}
                 className="bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center"
               >
                 Pay & Enroll
-              </button>
+              </Link>
             </div>
           </div>
         </div>

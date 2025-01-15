@@ -12,7 +12,8 @@ import { PiEyeClosedFill } from "react-icons/pi";
 const Register = () => {
   const navigate = useNavigate();
   const [passTogol, setPassTogol] = useState(true);
-  const { createUser, googleLogin, updateProfiles, setuser } = useContexHooks();
+  const { createUser, googleLogin, updateUserProfile, setUser } =
+    useContexHooks();
 
   const {
     register,
@@ -48,12 +49,12 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         if (result.user) {
-          setuser(result.user);
-          updateProfiles({ displayName: name, photoURL: imgUrl }).then(() => {
+          setUser(result.user);
+          updateUserProfile(name, imgUrl).then(() => {
             successNofity();
-            navigate("/marathons");
+            navigate("/");
 
-            setuser((prev) => ({
+            setUser((prev) => ({
               ...prev,
               displayName: name,
               photoURL: imgUrl,
@@ -154,7 +155,7 @@ const Register = () => {
                 </label>
                 <div className="relative">
                   <input
-                    type="password"
+                    type={passTogol ? "password" : "text"}
                     {...register("password", {
                       required: "Password is required",
                     })}

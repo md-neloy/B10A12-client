@@ -9,6 +9,7 @@ import PrivateRoute from "../PrivateRouts/PrivateRouts";
 import TeachOn from "../Pages/TechOn/TechOn";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Details from "../Pages/Details/Details";
+import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Details />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment/:price",
+        element: (
+          <PrivateRoute>
+            <Payment />
           </PrivateRoute>
         ),
       },
