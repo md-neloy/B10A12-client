@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import { FaEnvelope, FaPhone, FaUser } from "react-icons/fa";
-import userAnimation from "./profile.json"
+import userAnimation from "./profile.json";
 const Profile = () => {
   return (
     <>
@@ -11,11 +11,7 @@ const Profile = () => {
           </div>
           <div className="card w-full lg:w-96 bg-base-100 shadow-xl mx-auto">
             <figure>
-              <img
-                src=""
-                alt="User"
-                className="rounded-full w-32 h-32 mt-4"
-              />
+              <img src="" alt="User" className="rounded-full w-32 h-32 mt-4" />
             </figure>
             <div className="card-body text-center">
               <h2 className="card-title text-xl font-bold flex items-center justify-center gap-2">
@@ -26,7 +22,7 @@ const Profile = () => {
                 <div className="flex items-center justify-center gap-2">
                   <FaEnvelope className="text-primary" />
                   <a
-                    href={`mailto:${/* email */}`}
+                    // href={`mailto:${/* email */}`}
                     className="text-blue-600 hover:underline"
                   >
                     {/* email */}
@@ -35,7 +31,7 @@ const Profile = () => {
                 <div className="flex items-center justify-center gap-2 mt-2">
                   <FaPhone className="text-primary" />
                   <a
-                    href={`tel:${/* phone */}`}
+                    // href={`tel:${/* phone */}`}
                     className="text-blue-600 hover:underline"
                   >
                     {/* phone */}
@@ -48,6 +44,6 @@ const Profile = () => {
       </div>
     </>
   );
-}
+};
 
-export default Profile
+export default Profile;

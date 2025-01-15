@@ -3,6 +3,7 @@ import Community from "./Community";
 import Partners from "./Partners";
 import Question from "./Question";
 import RivewCard from "./RivewCard";
+import Teacher from "./Teacher";
 import TopEnroll from "./TopEnroll";
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
       <TopEnroll />
       <RivewCard />
       <Community />
+      <Teacher />
       <Question />
     </div>
   );
