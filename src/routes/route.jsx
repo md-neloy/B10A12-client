@@ -7,6 +7,8 @@ import Register from "../Pages/register/Register";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import PrivateRoute from "../PrivateRouts/PrivateRouts";
 import TeachOn from "../Pages/TechOn/TechOn";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import Details from "../Pages/Details/Details";
 
 const router = createBrowserRouter([
   {
@@ -31,12 +33,33 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <Details />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/signIn",
         element: <SignIn />,
       },
       {
         path: "/register",
         element: <Register />,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: `payment`,
       },
     ],
   },

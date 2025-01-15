@@ -43,7 +43,11 @@ const AllClassesCard = ({ item }) => {
             </div>
             {/* Card Actions */}
             <div className="card-actions mt-auto p-3 ">
-              <Button text="Enroll" width="100%" />
+              <Button
+                text="Enroll"
+                width="100%"
+                link={`/details/${item._id}`}
+              />
             </div>
           </div>
         </div>

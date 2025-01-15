@@ -25,7 +25,7 @@ const Button = ({
 
 export default Button;
 Button.propTypes = {
-  link: PropTypes.string,
+  link: PropTypes.any,
   text: PropTypes.string,
   width: PropTypes.string,
   logo: PropTypes.any,

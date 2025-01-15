@@ -11,7 +11,7 @@ const useAxiosSecure = () => {
   // request interceptor to add authorization header for every secure call to the api
   axiosSecure.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem("access-token");
+      const token = localStorage.getItem("accessToken");
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
@@ -29,7 +29,7 @@ const useAxiosSecure = () => {
       const status = err.response.status;
       if (status === 401 || status === 403) {
         await logOut();
-        navigate("/login");
+        navigate("/signIn");
       }
       return Promise.reject(err);
     }

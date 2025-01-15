@@ -6,34 +6,34 @@ import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
 import useContexHooks from "../../useHooks/useContexHooks";
 import imageUpload from "../../useHooks/imageUpload";
-import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-// Function to create a post (POST request via Axios)
-const createPost = async (newpost) => {
-  const response = await axios.post("http://localhost:5050/teacher", newpost);
-  return response.data;
-};
+import useAxiosSecure from "../../useHooks/useAxiosSecure";
 
 const TeachOn = () => {
-  const { user } = useContexHooks(); // Custom hook to get the current user
-  const queryClient = useQueryClient(); // To manage query cache and invalidation
+  const { user } = useContexHooks();
+  const queryClient = useQueryClient();
+  const axiosSecure = useAxiosSecure();
+  const createPost = async (newpost) => {
+    const response = await axiosSecure.post("/teacher", newpost);
+    return response.data;
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   // Define the mutation
   const mutation = useMutation({
     mutationFn: createPost,
     onSuccess: () => {
-      // Invalidate and refetch any relevant queries
       queryClient.invalidateQueries(["teacherPosts"]);
       toast.success("Your application has been submitted successfully!", {
         position: "top-center",
       });
+      reset();
     },
     onError: (error) => {
       toast.error(`Submission failed: ${error.message}`, {
@@ -46,10 +46,9 @@ const TeachOn = () => {
   const onSubmit = async (data) => {
     const { image, ...formData } = data;
 
-    // Step 1: Upload Image
     try {
-      const imgUrl = await imageUpload(image[0]); // Custom hook for image upload
-      formData.image = imgUrl; // Add image URL to the form data
+      const imgUrl = await imageUpload(image[0]);
+      formData.image = imgUrl;
     } catch (err) {
       console.error("Image upload failed:", err.message);
       toast.error("Image upload failed. Please try again.", {
@@ -58,15 +57,13 @@ const TeachOn = () => {
       return;
     }
 
-    // Step 2: Add Additional Fields
     formData.status = "pending";
-    formData.email = user.email; // Attach the user's email
+    formData.email = user.email;
 
     console.log("Final Payload:", formData);
 
-    // Step 3: Submit Post via Mutation
     try {
-      mutation.mutateAsync(formData); // Use mutateAsync for async actions
+      mutation.mutateAsync(formData);
     } catch (err) {
       console.error("Submission failed:", err.message);
     }
