@@ -40,8 +40,9 @@ const Navbar = () => {
           All Classes
         </NavLink>
       </li>
-      <li to="">
+      <li>
         <NavLink
+          to="/techon"
           className={({ isActive }) =>
             isActive
               ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
