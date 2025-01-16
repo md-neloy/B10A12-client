@@ -35,14 +35,14 @@ const AllClasses = () => {
     isFetching: isFetchingClasses,
     error: classesError,
   } = useQuery({
-    queryKey: ["allclasses", currentPage, itemsPerPage], // Depend on page and itemsPerPage
+    queryKey: ["allclasses", currentPage, itemsPerPage],
     queryFn: async () => {
       const res = await axiosPublic.get(
         `/allclasses?page=${currentPage - 1}&limit=${itemsPerPage}`
       );
       return res.data;
     },
-    keepPreviousData: true, // Smooth transitions between state changes
+    keepPreviousData: true,
   });
 
   // Handle change in items per page

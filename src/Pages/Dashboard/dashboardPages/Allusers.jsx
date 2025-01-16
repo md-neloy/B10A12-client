@@ -8,14 +8,29 @@ const AdminUsersTable = () => {
   const [searchQuery, setSearchQuery] = useState(null);
   const axiosSecure = useAxiosSecure();
   const { user } = useContexHooks();
+  const [itemsPerPage, setItemsPerPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data: useCounts } = useQuery({
+    queryKey: ["useCounts"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/alluser-admin-count`);
+      console.log(res.data);
+      return res.data;
+    },
+  });
+  const numOfData = useCounts?.result || 0;
+  const numberOfPages = Math.ceil(numOfData / itemsPerPage);
+  const pages = [...Array(numberOfPages).keys()];
   const {
     data: users,
     isFetching,
     error,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", currentPage, itemsPerPage],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/alluser-admin`);
+      const res = await axiosSecure.get(
+        `/alluser-admin?page=${currentPage - 1}&limit=${itemsPerPage}`
+      );
       console.log(res.data);
       return res.data;
     },
@@ -34,6 +49,15 @@ const AdminUsersTable = () => {
   }
   const onSearch = () => {};
   const onMakeAdmin = () => {};
+  // for pagination
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+  const handleItemsPerPageChange = (e) => {
+    const value = parseInt(e.target.value);
+    setItemsPerPage(value);
+    setCurrentPage(1);
+  };
   return (
     <div className="w-full px-4 py-6">
       {/* Search Input */}
@@ -102,6 +126,71 @@ const AdminUsersTable = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="pagination">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <button
+            className="btn btn-square"
+            onClick={() => {
+              if (currentPage > 1) {
+                handlePageChange(currentPage - 1);
+              }
+            }}
+          >
+            Prev
+          </button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={
+                currentPage === page + 1
+                  ? `bg-[#4CAF50] hover:bg-[#388E3C] text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center`
+                  : "btn btn-outline"
+              }
+              onClick={() => {
+                handlePageChange(page + 1);
+              }}
+            >
+              {page + 1}
+            </button>
+          ))}
+          <button
+            className="btn btn-square"
+            onClick={() => {
+              if (currentPage < numberOfPages) {
+                handlePageChange(currentPage + 1);
+              }
+            }}
+          >
+            Next
+          </button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "12px",
+            }}
+          >
+            <select
+              value={itemsPerPage}
+              onChange={handleItemsPerPageChange}
+              name="itemsPerPage"
+            >
+              <option value="3">3</option>
+              <option value="6">6</option>
+              <option value="10">9</option>
+              <option value="20">21</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );
