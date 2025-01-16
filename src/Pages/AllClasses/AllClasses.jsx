@@ -21,13 +21,13 @@ const AllClasses = () => {
     queryKey: ["counts"],
     queryFn: async () => {
       const res = await axiosPublic.get("/totalCount");
+      console.log(res);
       return res.data;
     },
   });
-
-  const numOfData = counts?.allClasses || 0; // Total number of items
-  const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1; // Total pages
-  const pages = [...Array(numberOfPages).keys()]; // Array of page numbers
+  const numOfData = counts?.allClasses || 0;
+  const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1;
+  const pages = [...Array(numberOfPages).keys()];
 
   // Fetch paginated class data
   const {
@@ -81,18 +81,7 @@ const AllClasses = () => {
               <AllClassesCard key={classes._id} item={classes} />
             ))}
           </div>
-          <div className="pagination">
-            {/* Current Page */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "12px",
-              }}
-            >
-              Current Page: {currentPage}
-            </div>
+          <div className="pagination py-4">
             {/* Pagination Buttons */}
             <div
               style={{

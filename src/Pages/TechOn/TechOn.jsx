@@ -254,13 +254,13 @@ const TeachOn = () => {
                 disabled={
                   mutation.isLoading ||
                   isTeacher === "pending" ||
-                  isTeacher === "teacher"
+                  isTeacher === "approved"
                 } // Disable the button while loading
               >
                 {/* ? "Wait for the review":isTeacher === 'teacher'?"You are now Teacher":isTeacher === false? */}
                 {isTeacher === "pending"
                   ? "Wait For the Reviwe"
-                  : isTeacher === "teacher"
+                  : isTeacher === "approved"
                   ? "You are now Teacher"
                   : isTeacher === "reject"
                   ? "Submit for another"

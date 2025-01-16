@@ -72,6 +72,7 @@ const Register = () => {
           const userInfo = {
             name: name,
             email: email,
+            image: imgUrl,
             role: "student",
           };
           mutation.mutateAsync(userInfo);
@@ -97,6 +98,7 @@ const Register = () => {
         const userInfo = {
           name: user.displayName,
           email: user.email,
+          image: user.photoURL,
           role: "student",
         };
         mutation.mutateAsync(userInfo);

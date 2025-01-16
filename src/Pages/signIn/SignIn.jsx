@@ -76,6 +76,7 @@ const SignIn = () => {
         const userInfo = {
           name: user.displayName,
           email: user.email,
+          image: user.photoURL,
           role: "student",
         };
         mutation.mutateAsync(userInfo);
