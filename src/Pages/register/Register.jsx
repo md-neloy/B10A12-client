@@ -8,12 +8,31 @@ import { useForm } from "react-hook-form";
 import useContexHooks from "../../useHooks/useContexHooks";
 import { useState } from "react";
 import { PiEyeClosedFill } from "react-icons/pi";
+import useAxiosPublic from "../../useHooks/useAxiosPublic";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Register = () => {
   const navigate = useNavigate();
   const [passTogol, setPassTogol] = useState(true);
+  const queryClient = useQueryClient();
   const { createUser, googleLogin, updateUserProfile, setUser } =
     useContexHooks();
+  const axiosPublic = useAxiosPublic();
+  const createPost = async (newpost) => {
+    const response = await axiosPublic.post("/users", newpost);
+    return response.data;
+  };
+
+  // Define the mutation
+  const mutation = useMutation({
+    mutationFn: createPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const {
     register,
@@ -50,6 +69,12 @@ const Register = () => {
       .then((result) => {
         if (result.user) {
           setUser(result.user);
+          const userInfo = {
+            name: name,
+            email: email,
+            role: "student",
+          };
+          mutation.mutateAsync(userInfo);
           updateUserProfile(name, imgUrl).then(() => {
             successNofity();
             navigate("/");
@@ -68,8 +93,14 @@ const Register = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        console.log(result.user);
-        navigate("/marathons");
+        const user = result.user;
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          role: "student",
+        };
+        mutation.mutateAsync(userInfo);
+        navigate("/");
         toast.success("Successfully logged in with Google!", {
           position: "top-center",
         });

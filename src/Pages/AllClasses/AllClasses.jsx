@@ -3,7 +3,6 @@ import Container from "../../Sharecomponent/Container";
 import useAxiosPublic from "../../useHooks/useAxiosPublic";
 import PreLoader from "../../components/PreLoader";
 import { useState } from "react";
-import "./AllClasses.css";
 import AllClassesCard from "./AllClassesCard";
 import SectionHeader from "../../components/SectionHeader";
 

@@ -8,12 +8,32 @@ import { useForm } from "react-hook-form";
 import useContexHooks from "../../useHooks/useContexHooks";
 import { useState } from "react";
 import { PiEyeClosedFill } from "react-icons/pi";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useAxiosPublic from "../../useHooks/useAxiosPublic";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const queryClient = useQueryClient();
+  const axiosPublic = useAxiosPublic();
   const [passTogol, setPassTogol] = useState(true);
   const { loginUser, googleLogin } = useContexHooks();
+
+  const createPost = async (newpost) => {
+    const response = await axiosPublic.post("/users", newpost);
+    return response.data;
+  };
+
+  // Define the mutation
+  const mutation = useMutation({
+    mutationFn: createPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const successNofity = () => {
     toast.success("Successfully Login!", {
@@ -51,7 +71,14 @@ const SignIn = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then(() => {
+      .then((result) => {
+        const user = result.user;
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          role: "student",
+        };
+        mutation.mutateAsync(userInfo);
         if (location.state) {
           navigate(location.state);
         } else {

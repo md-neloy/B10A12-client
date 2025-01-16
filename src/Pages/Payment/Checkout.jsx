@@ -72,6 +72,7 @@ const Checkout = ({ price }) => {
       setIsProcessing(false);
       return;
     } else {
+      console.log(paymentMethod);
       setError("");
     }
 

@@ -127,15 +127,19 @@ const Navbar = () => {
                 <div className="z-50 bg-blue-400 absolute top-[125%] left-1/2 -translate-x-1/2 w-max rounded-md hidden group-hover:block">
                   <div className="absolute w-4 h-4 rotate-45 bg-blue-400 -top-2 left-1/2 -translate-x-1/2"></div>
                   <div className="text-sm p-2 text-center">
-                    <p>{user.displayName || "Anonymous User"}</p>
-                    <ul className="menu menu-vertical">
-                      <li>
-                        <NavLink>Dashboard</NavLink>
+                    <p className="text-xl font-bold my-2">
+                      {user.displayName || "Anonymous User"}
+                    </p>
+                    <ul className="menu menu-vertical p-0">
+                      <li className="!bg-[#4CAF50] border-[1px] border-solid border-white rounded-lg">
+                        <NavLink to={"/dashboard"} className={"w-full"}>
+                          Dashboard
+                        </NavLink>
                       </li>
                     </ul>
                     <button
                       onClick={logOut}
-                      className="btn btn-sm mt-2 bg-red-500 text-white"
+                      className="btn btn-sm mt-2 bg-red-500 text-white w-full"
                     >
                       Log Out
                     </button>
