@@ -1,4 +1,5 @@
-import { FaCalendar, FaHome } from "react-icons/fa";
+import { MdAssignmentAdd } from "react-icons/md";
+import { SiGoogleclassroom } from "react-icons/si";
 import { NavLink } from "react-router-dom";
 
 const TeacherMenu = () => {
@@ -6,18 +7,18 @@ const TeacherMenu = () => {
     <div>
       <li>
         {" "}
-        <NavLink to="/dashboard/userHome">
+        <NavLink to="/dashboard/addclass">
           {" "}
-          <FaHome />
-          User Home
+          <MdAssignmentAdd />
+          Add Class
         </NavLink>
       </li>
       <li>
         {" "}
-        <NavLink to="/dashboard/reservation">
+        <NavLink to="/dashboard/myclass">
           {" "}
-          <FaCalendar />
-          Reservation
+          <SiGoogleclassroom />
+          My Class
         </NavLink>
       </li>
     </div>

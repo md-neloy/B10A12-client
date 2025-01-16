@@ -12,6 +12,9 @@ import Details from "../Pages/Details/Details";
 import Payment from "../Pages/Payment/Payment";
 import StudentEnrollClass from "../Pages/Dashboard/dashboardPages/studentEnrollClass";
 import Profile from "../Pages/Profile/Profile";
+import AddClass from "../Pages/Dashboard/dashboardPages/AddClass";
+import TeacherRoute from "../privateRouts/TeacherRoute";
+import MyClass from "../Pages/Dashboard/dashboardPages/MyClass";
 
 const router = createBrowserRouter([
   {
@@ -71,12 +74,37 @@ const router = createBrowserRouter([
     children: [
       {
         path: `enrollclass`,
-        element: <StudentEnrollClass />,
+        element: (
+          <PrivateRoute>
+            <StudentEnrollClass />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "addclass",
+        element: (
+          <TeacherRoute>
+            <AddClass />
+          </TeacherRoute>
+        ),
+      },
+      {
+        path: "myclass",
+        element: (
+          <TeacherRoute>
+            <MyClass />
+          </TeacherRoute>
+        ),
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
+      {},
     ],
   },
 ]);

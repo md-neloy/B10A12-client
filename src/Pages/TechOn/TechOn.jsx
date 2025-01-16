@@ -6,13 +6,34 @@ import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
 import useContexHooks from "../../useHooks/useContexHooks";
 import imageUpload from "../../useHooks/imageUpload";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
+import PreLoader from "../../components/PreLoader";
 
 const TeachOn = () => {
   const { user } = useContexHooks();
   const queryClient = useQueryClient();
   const axiosSecure = useAxiosSecure();
+
+  const {
+    data: isTeacher,
+    isFetching,
+    error,
+  } = useQuery({
+    queryKey: ["classes"],
+    queryFn: async () => {
+      try {
+        const res = await axiosSecure.get(`/teacherReq/${user?.email}`);
+        return res.data;
+      } catch (err) {
+        throw new Error(
+          err.response?.data?.message || "Failed to fetch classes."
+        );
+      }
+    },
+  });
+  console.log(isTeacher);
+
   const createPost = async (newpost) => {
     const response = await axiosSecure.post("/teacher", newpost);
     return response.data;
@@ -68,6 +89,17 @@ const TeachOn = () => {
       console.error("Submission failed:", err.message);
     }
   };
+
+  if (isFetching) {
+    return <PreLoader />;
+  }
+  if (error) {
+    return (
+      <p className="text-2xl text-red-500">
+        {error || "An unknown error occurred."}
+      </p>
+    );
+  }
 
   return (
     <div className="bg-base-200 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -219,9 +251,22 @@ const TeachOn = () => {
               <button
                 type="submit"
                 className="btn btn-primary w-full"
-                disabled={mutation.isLoading} // Disable the button while loading
+                disabled={
+                  mutation.isLoading ||
+                  isTeacher === "pending" ||
+                  isTeacher === "teacher"
+                } // Disable the button while loading
               >
-                {mutation.isLoading ? "Submitting..." : "Submit for Review"}
+                {/* ? "Wait for the review":isTeacher === 'teacher'?"You are now Teacher":isTeacher === false? */}
+                {isTeacher === "pending"
+                  ? "Wait For the Reviwe"
+                  : isTeacher === "teacher"
+                  ? "You are now Teacher"
+                  : isTeacher === "reject"
+                  ? "Submit for another"
+                  : mutation.isLoading
+                  ? "Submitting..."
+                  : "Submit for review"}
               </button>
             </div>
           </form>
