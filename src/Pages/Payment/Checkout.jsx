@@ -7,16 +7,18 @@ import { useState } from "react";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-const Checkout = ({ price }) => {
+const Checkout = ({ ids }) => {
   const [clientSecret, setClientSecret] = useState(null);
   const [transactionId, setTransactionId] = useState(null);
   const [Error, setError] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const { user } = useContexHooks();
+  const { user, enrollPrice } = useContexHooks();
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const { handleSubmit, reset } = useForm();
 
@@ -43,7 +45,7 @@ const Checkout = ({ price }) => {
 
     // Step 1: Create payment intent if clientSecret is not already set
     if (!clientSecret) {
-      await mutation.mutateAsync({ price: parseInt(price) });
+      await mutation.mutateAsync({ price: parseInt(enrollPrice) });
     }
 
     if (!stripe || !elements || !clientSecret) {
@@ -95,6 +97,10 @@ const Checkout = ({ price }) => {
       setTransactionId(paymentIntent.id);
       toast.success("Payment successful!");
       reset();
+      await axiosSecure.patch(
+        `/classenroll-update/${ids}?name=${user?.displayName}&email=${user?.email}`
+      );
+      navigate("/dashboard");
       setIsProcessing(false);
     }
   };
@@ -145,7 +151,7 @@ const Checkout = ({ price }) => {
           <input
             type="text"
             id="price"
-            value={"$" + price}
+            value={"$" + enrollPrice}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#388E3C]"
             readOnly
           />
@@ -195,5 +201,5 @@ const Checkout = ({ price }) => {
 export default Checkout;
 
 Checkout.propTypes = {
-  price: PropTypes.string.isRequired,
+  ids: PropTypes.string.isRequired,
 };

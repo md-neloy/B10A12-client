@@ -36,9 +36,15 @@ const Community = () => {
           <div className="flex flex-col lg:flex-row justify-center items-center gap-5">
             {/* Left: Community Cards */}
             <div className="flex flex-col gap-5 w-full lg:w-1/3">
-              <ComunityCard title={"Total Classes"} count={counts.allClasses} />
-              <ComunityCard title={"Total Users"} count={counts.alluser} />
-              <ComunityCard title={"Total Enroll"} count={counts.totalEnroll} />
+              <ComunityCard
+                title={"Total Classes"}
+                count={counts?.allClasses}
+              />
+              <ComunityCard title={"Total Users"} count={counts?.alluser} />
+              <ComunityCard
+                title={"Total Enroll"}
+                count={counts?.totalEnroll}
+              />
             </div>
 
             {/* Right: Image */}

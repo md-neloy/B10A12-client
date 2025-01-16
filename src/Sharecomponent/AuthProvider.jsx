@@ -17,6 +17,7 @@ export const Context = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [enrollPrice, setEnrollPrice] = useState(0);
   // dark theme togol
   const [togol, setTogol] = useState(true);
 
@@ -84,6 +85,8 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     togol,
+    enrollPrice,
+    setEnrollPrice,
     setTogol,
     setUser,
     setLoading,

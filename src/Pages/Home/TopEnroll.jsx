@@ -70,7 +70,7 @@ const TopEnroll = () => {
             }}
             className="mySwiper2 "
           >
-            {classes.map((item) => (
+            {classes?.map((item) => (
               <SwiperSlide key={item._id} className="h-auto">
                 <AllClassesCard item={item} />
               </SwiperSlide>

@@ -59,7 +59,7 @@ const RivewCard = () => {
             modules={[EffectCoverflow, Pagination]}
             className="mySwiper"
           >
-            {feedbacks.map((feedback) => (
+            {feedbacks?.map((feedback) => (
               <SwiperSlide key={feedback._id} className="h-auto">
                 <div className="card bg-gradient-to-r h-full bg-[#E9ECEF] p-5 rounded-xl shadow-xl transform transition-all hover:scale-105 hover:shadow-2xl">
                   {/* title */}

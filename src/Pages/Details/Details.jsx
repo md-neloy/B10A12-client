@@ -4,9 +4,12 @@ import { Helmet } from "react-helmet-async";
 import { FaChalkboardTeacher, FaDollarSign } from "react-icons/fa";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
+import { useEffect } from "react";
+import useContexHooks from "../../useHooks/useContexHooks";
 
 const Details = () => {
-  const { id } = useParams(); // Get the class ID from the route params
+  const { id } = useParams();
+  const { setEnrollPrice } = useContexHooks();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
 
@@ -27,6 +30,10 @@ const Details = () => {
   const handlePayment = () => {
     navigate(`/payment/${id}`); // Navigate to the payment page
   };
+
+  useEffect(() => {
+    setEnrollPrice(classDetails?.price);
+  }, [setEnrollPrice, classDetails]);
 
   if (isLoading) {
     return <div className="text-center mt-10">Loading class details...</div>;
@@ -84,7 +91,7 @@ const Details = () => {
               )}
               {/* Payment Button */}
               <Link
-                to={`/payment/${price}`}
+                to={`/payment/${id}`}
                 onClick={handlePayment}
                 className="bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center"
               >
