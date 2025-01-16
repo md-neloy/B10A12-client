@@ -15,6 +15,10 @@ import Profile from "../Pages/Profile/Profile";
 import AddClass from "../Pages/Dashboard/dashboardPages/AddClass";
 import TeacherRoute from "../privateRouts/TeacherRoute";
 import MyClass from "../Pages/Dashboard/dashboardPages/MyClass";
+import AdminRoute from "../privateRouts/AdminRoute";
+import Allusers from "../Pages/Dashboard/dashboardPages/Allusers";
+import AllAdimClasses from "../Pages/Dashboard/dashboardPages/AllAdimClasses";
+import TeacherRq from "../Pages/Dashboard/dashboardPages/TeacherRq";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +76,7 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // dashbaord student route
       {
         path: `enrollclass`,
         element: (
@@ -80,6 +85,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // dashboard teacher route
       {
         path: "addclass",
         element: (
@@ -96,6 +102,32 @@ const router = createBrowserRouter([
           </TeacherRoute>
         ),
       },
+      // dashboard admin route
+      {
+        path: "allusers",
+        element: (
+          <AdminRoute>
+            <Allusers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "allclasses",
+        element: (
+          <AdminRoute>
+            <AllAdimClasses />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "teacherRq",
+        element: (
+          <AdminRoute>
+            <TeacherRq />
+          </AdminRoute>
+        ),
+      },
+      // dashboard common route
       {
         path: "profile",
         element: (
@@ -104,7 +136,6 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {},
     ],
   },
 ]);

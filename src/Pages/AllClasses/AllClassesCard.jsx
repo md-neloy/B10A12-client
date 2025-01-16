@@ -38,8 +38,7 @@ const AllClassesCard = ({ item }) => {
             </div>
             {/* Description */}
             <div className="flex">
-              <h2 className="w-1/4">Description</h2>
-              <h2 className="flex-1">: {item.description}</h2>
+              <h2 className="flex-1">{item.description}</h2>
             </div>
             {/* Card Actions */}
             <div className="card-actions mt-auto p-3 ">

@@ -1,4 +1,5 @@
-import { FaBook, FaHome, FaList, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
+import { MdClass, MdPendingActions } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 const AdminMenu = () => {
@@ -6,42 +7,26 @@ const AdminMenu = () => {
     <div>
       <li>
         {" "}
-        <NavLink to="/dashboard/adminHome">
+        <NavLink to="/dashboard/teacherRq">
           {" "}
-          <FaHome />
-          Admin Home
+          <MdPendingActions />
+          Teacher Request
         </NavLink>
       </li>
       <li>
         {" "}
-        <NavLink to="/dashboard/addItems">
-          {" "}
-          <FaUtensils />
-          Add Items
-        </NavLink>
-      </li>
-      <li>
-        {" "}
-        <NavLink to="/dashboard/manageItems">
-          {" "}
-          <FaList />
-          Manage Items
-        </NavLink>
-      </li>
-      <li>
-        {" "}
-        <NavLink to="/dashboard/bookings">
-          {" "}
-          <FaBook />
-          Manage Bookings
-        </NavLink>
-      </li>
-      <li>
-        {" "}
-        <NavLink to="/dashboard/allUsers">
+        <NavLink to="/dashboard/allusers">
           {" "}
           <FaUsers />
-          All Users
+          Users
+        </NavLink>
+      </li>
+      <li>
+        {" "}
+        <NavLink to="/dashboard/allclasses">
+          {" "}
+          <MdClass />
+          All Classes
         </NavLink>
       </li>
     </div>

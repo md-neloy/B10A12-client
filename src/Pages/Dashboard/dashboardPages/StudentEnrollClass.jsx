@@ -3,6 +3,7 @@ import EnrollClassCard from "../../../components/EnrollClassCard";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import PreLoader from "../../../components/PreLoader";
 import useContexHooks from "../../../useHooks/useContexHooks";
+import SectionHeader from "../../../components/SectionHeader";
 
 const StudentEnrollClass = () => {
   const axiosSecure = useAxiosSecure();
@@ -41,18 +42,21 @@ const StudentEnrollClass = () => {
   }
 
   return (
-    <div className="p-5">
-      {classes?.length === 0 ? (
-        <p className="text-red-600 text-xl text-center mt-4">
-          You Have Not Enrolled Yet
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {classes.map((singleclass, idx) => (
-            <EnrollClassCard key={idx} item={singleclass} />
-          ))}
-        </div>
-      )}
+    <div>
+      <div className="p-5">
+        <SectionHeader title={"Your Enroll Classes"} />
+        {classes?.length === 0 ? (
+          <p className="text-red-600 text-xl text-center mt-4">
+            You Have Not Enrolled Yet
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {classes.map((singleclass, idx) => (
+              <EnrollClassCard key={idx} item={singleclass} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

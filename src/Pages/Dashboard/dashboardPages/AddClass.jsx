@@ -108,6 +108,7 @@ const AddClass = () => {
                 <input
                   type="text"
                   value={user?.displayName}
+                  {...register("name", { required: "name is required" })}
                   readOnly
                   className="input input-bordered"
                 />
@@ -119,6 +120,7 @@ const AddClass = () => {
                 </label>
                 <input
                   type="email"
+                  {...register("email", { required: "Email is required" })}
                   value={user?.email}
                   readOnly
                   className="input input-bordered"
