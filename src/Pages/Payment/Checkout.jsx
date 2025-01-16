@@ -100,7 +100,7 @@ const Checkout = ({ ids }) => {
       await axiosSecure.patch(
         `/classenroll-update/${ids}?name=${user?.displayName}&email=${user?.email}`
       );
-      navigate("/dashboard");
+      navigate("/dashboard/enrollclass");
       setIsProcessing(false);
     }
   };

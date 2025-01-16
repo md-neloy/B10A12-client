@@ -10,6 +10,8 @@ import TeachOn from "../Pages/TechOn/TechOn";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Details from "../Pages/Details/Details";
 import Payment from "../Pages/Payment/Payment";
+import StudentEnrollClass from "../Pages/Dashboard/dashboardPages/studentEnrollClass";
+import Profile from "../Pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -68,7 +70,12 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: `payment`,
+        path: `enrollclass`,
+        element: <StudentEnrollClass />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },

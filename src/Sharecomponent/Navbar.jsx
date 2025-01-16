@@ -132,7 +132,10 @@ const Navbar = () => {
                     </p>
                     <ul className="menu menu-vertical p-0">
                       <li className="!bg-[#4CAF50] border-[1px] border-solid border-white rounded-lg">
-                        <NavLink to={"/dashboard"} className={"w-full"}>
+                        <NavLink
+                          to={"/dashboard/enrollclass"}
+                          className={"w-full"}
+                        >
                           Dashboard
                         </NavLink>
                       </li>

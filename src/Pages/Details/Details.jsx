@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import { useEffect } from "react";
 import useContexHooks from "../../useHooks/useContexHooks";
+import PreLoader from "../../components/PreLoader";
 
 const Details = () => {
   const { id } = useParams();
@@ -36,7 +37,7 @@ const Details = () => {
   }, [setEnrollPrice, classDetails]);
 
   if (isLoading) {
-    return <div className="text-center mt-10">Loading class details...</div>;
+    return <PreLoader />;
   }
 
   if (error) {

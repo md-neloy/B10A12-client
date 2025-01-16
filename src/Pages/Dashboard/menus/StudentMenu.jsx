@@ -6,7 +6,7 @@ const StudentMenu = () => {
     <div>
       <li>
         {" "}
-        <NavLink to="">
+        <NavLink to="/dashboard/enrollclass">
           {" "}
           <FaHome />
           My Enroll Classes

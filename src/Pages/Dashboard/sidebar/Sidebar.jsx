@@ -11,7 +11,7 @@ const Sidebar = () => {
   const [isTeacher] = useTeacher();
   return (
     <div>
-      <div className="w-64 min-h-[calc(100vh-292px)] bg-[#4CAF50]">
+      <div className="w-full md:w-64 h-full bg-[#4CAF50]">
         <ul className="menu">
           {isAdmin ? (
             <AdminMenu />
@@ -30,7 +30,7 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/order/Salad"}>
+            <NavLink to={"/dashboard/profile"}>
               <FaUser /> Profile
             </NavLink>
           </li>
