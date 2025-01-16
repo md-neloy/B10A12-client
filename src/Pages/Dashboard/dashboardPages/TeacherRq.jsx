@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import PreLoader from "../../../components/PreLoader";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const TeacherRq = () => {
   const axiosSecure = useAxiosSecure();
@@ -23,6 +24,7 @@ const TeacherRq = () => {
   const {
     data: requests,
     isFetching,
+    refetch,
     error,
   } = useQuery({
     queryKey: ["requests", itemsPerPage, currentPage],
@@ -52,8 +54,28 @@ const TeacherRq = () => {
       </p>
     );
   }
-  const onApprove = () => {};
-  const onReject = () => {};
+  const onApprove = (id) => {
+    axiosSecure
+      .patch(`/class-request/${id}?message=approved`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          toast.success("successfully upgradet as Teacher");
+        }
+        refetch();
+      })
+      .catch((err) => console.log(err));
+  };
+  const onReject = (id) => {
+    axiosSecure
+      .patch(`/class-request/${id}`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          toast.error("Rejected as a Teacher");
+        }
+        refetch();
+      })
+      .catch((err) => console.log(err));
+  };
   // for pagination
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -83,7 +105,7 @@ const TeacherRq = () => {
           {/* Table Body */}
           <tbody>
             {requests.map((request) => (
-              <tr key={request.id} className="hover:bg-gray-50">
+              <tr key={request._id} className="hover:bg-gray-50">
                 {/* Name */}
                 <td className="px-4 py-3 text-gray-800 font-medium">
                   {request.name}
@@ -128,13 +150,15 @@ const TeacherRq = () => {
                 <td className="px-4 py-3 text-center">
                   <button
                     className="btn btn-sm bg-green-500 text-white hover:bg-green-600 px-3 py-1 rounded-md"
-                    onClick={() => onApprove(request.id)}
+                    disabled={request.status === "reject"}
+                    onClick={() => onApprove(request._id)}
                   >
                     Approve
                   </button>
                   <button
                     className="btn btn-sm bg-red-500 text-white hover:bg-red-600 px-3 py-1 rounded-md ml-2"
-                    onClick={() => onReject(request.id)}
+                    disabled={request.status === "reject"}
+                    onClick={() => onReject(request._id)}
                   >
                     Reject
                   </button>
