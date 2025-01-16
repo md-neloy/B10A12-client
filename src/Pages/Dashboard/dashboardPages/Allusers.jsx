@@ -2,19 +2,17 @@ import { useState } from "react";
 import PreLoader from "../../../components/PreLoader";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
-import useContexHooks from "../../../useHooks/useContexHooks";
+import { toast } from "react-toastify";
 
 const AdminUsersTable = () => {
-  const [searchQuery, setSearchQuery] = useState(null);
+  const [searchOn, setSearchOn] = useState("");
   const axiosSecure = useAxiosSecure();
-  const { user } = useContexHooks();
   const [itemsPerPage, setItemsPerPage] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: useCounts } = useQuery({
     queryKey: ["useCounts"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/alluser-admin-count`);
-      console.log(res.data);
       return res.data;
     },
   });
@@ -24,14 +22,16 @@ const AdminUsersTable = () => {
   const {
     data: users,
     isFetching,
+    refetch,
     error,
   } = useQuery({
-    queryKey: ["users", currentPage, itemsPerPage],
+    queryKey: ["users", currentPage, itemsPerPage, searchOn],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/alluser-admin?page=${currentPage - 1}&limit=${itemsPerPage}`
+        `/alluser-admin?page=${
+          currentPage - 1
+        }&limit=${itemsPerPage}&search=${searchOn}`
       );
-      console.log(res.data);
       return res.data;
     },
   });
@@ -47,8 +47,21 @@ const AdminUsersTable = () => {
       </p>
     );
   }
-  const onSearch = () => {};
-  const onMakeAdmin = () => {};
+  const onSearch = () => {
+    const value = document.querySelector("input[name='search']");
+    setSearchOn(value.value);
+  };
+  const onMakeAdmin = (id) => {
+    axiosSecure
+      .patch(`/users/makeAdmin/${id}`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          toast.success("Successfully Make Admin");
+          refetch();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   // for pagination
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -61,13 +74,12 @@ const AdminUsersTable = () => {
   return (
     <div className="w-full px-4 py-6">
       {/* Search Input */}
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-start mb-4">
         <input
           type="text"
+          name="search"
           placeholder="Search by name or email"
           className="input input-bordered w-full max-w-sm"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button onClick={onSearch} className="btn btn-primary ml-2">
           Search
@@ -90,7 +102,7 @@ const AdminUsersTable = () => {
           {/* Table Body */}
           <tbody>
             {users.map((data) => (
-              <tr key={data.id} className="hover:bg-gray-50">
+              <tr key={data._id} className="hover:bg-gray-50">
                 {/* User Name */}
                 <td className="px-4 py-3 text-gray-800 font-medium">
                   {data.name}
@@ -111,8 +123,8 @@ const AdminUsersTable = () => {
                 {/* Actions */}
                 <td className="px-4 py-3 text-center">
                   <button
-                    onClick={() => onMakeAdmin(data.id)}
-                    disabled={data.isAdmin}
+                    onClick={() => onMakeAdmin(data._id)}
+                    disabled={data.role === "admin"}
                     className={`btn btn-sm ${
                       data.isAdmin
                         ? "bg-gray-400 text-white cursor-not-allowed"
