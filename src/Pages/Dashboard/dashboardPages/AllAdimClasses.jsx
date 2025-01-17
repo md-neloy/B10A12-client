@@ -2,16 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import PreLoader from "../../../components/PreLoader";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import SeeProgressByAdmin from "./SeeProgressByAdmin";
 
 const AllAdminClasses = () => {
   const axiosSecure = useAxiosSecure();
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedClass, setSelectedClass] = useState(null);
+
   const { data: classCount } = useQuery({
     queryKey: ["classCount"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/adminClassPagination`);
-      console.log(res);
       return res.data;
     },
   });
@@ -19,10 +22,11 @@ const AllAdminClasses = () => {
   const numOfData = classCount?.result || 0;
   const numberOfPages = Math.ceil(numOfData / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()];
-  console.log(currentPage);
+
   const {
     data: classes,
     isFetching,
+    refetch,
     error,
   } = useQuery({
     queryKey: ["classes", currentPage, itemsPerPage],
@@ -33,8 +37,6 @@ const AllAdminClasses = () => {
       return res.data;
     },
   });
-
-  console.log(classes?.length);
 
   if (isFetching) {
     return <PreLoader />;
@@ -48,17 +50,48 @@ const AllAdminClasses = () => {
     );
   }
 
-  const onReject = () => {};
-  const onApprove = () => {};
-  // for pagination
+  const onReject = (id) => {
+    axiosSecure
+      .patch(`/approved-reject-class/${id}?message=reject`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          toast.success("Successfully rejected the class");
+        }
+        refetch();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onApprove = (id) => {
+    axiosSecure
+      .patch(`/approved-reject-class/${id}?message=approved`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          toast.success("Successfully approved the class");
+        }
+        refetch();
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
   const handleItemsPerPageChange = (e) => {
     const value = parseInt(e.target.value);
     setItemsPerPage(value);
     setCurrentPage(1);
   };
+
+  const openModal = (classItem) => {
+    setSelectedClass(classItem);
+  };
+
+  const closeModal = () => {
+    setSelectedClass(null);
+  };
+
   return (
     <div>
       <div className="overflow-x-auto">
@@ -103,36 +136,26 @@ const AllAdminClasses = () => {
 
                 {/* Progress */}
                 <td className="px-4 py-3 text-center">
-                  <div className="w-32 bg-gray-200 rounded-full h-2.5">
-                    <div
-                      className={`h-2.5 rounded-full ${
-                        classItem.status === "approved"
-                          ? "bg-green-500"
-                          : "bg-yellow-500"
-                      }`}
-                      style={{
-                        width: classItem.status === "approved" ? "100%" : "50%", // Example progress: adjust as needed
-                      }}
-                    ></div>
-                  </div>
-                  <span className="text-xs text-gray-500 mt-1 block">
-                    {classItem.status === "approved"
-                      ? "100% Approved"
-                      : "50% Pending"}
-                  </span>
+                  <button
+                    disabled={classItem.status !== "approved"}
+                    className="btn btn-sm bg-green-500 text-white hover:bg-green-600 px-3 py-1 rounded-md"
+                    onClick={() => openModal(classItem)}
+                  >
+                    See Progress
+                  </button>
                 </td>
 
                 {/* Actions */}
                 <td className="px-4 py-3 text-center">
                   <button
                     className="btn btn-sm bg-green-500 text-white hover:bg-green-600 px-3 py-1 rounded-md"
-                    onClick={() => onApprove(classItem.id)}
+                    onClick={() => onApprove(classItem._id)}
                   >
                     Approve
                   </button>
                   <button
                     className="btn btn-sm bg-red-500 text-white hover:bg-red-600 px-3 py-1 rounded-md ml-2"
-                    onClick={() => onReject(classItem.id)}
+                    onClick={() => onReject(classItem._id)}
                   >
                     Reject
                   </button>
@@ -142,6 +165,8 @@ const AllAdminClasses = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Pagination */}
       <div className="pagination">
         <div
           style={{
@@ -207,6 +232,14 @@ const AllAdminClasses = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedClass && (
+        <SeeProgressByAdmin
+          classData={selectedClass} // Pass the selected class data
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };

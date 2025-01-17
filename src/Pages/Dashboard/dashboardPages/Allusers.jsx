@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const AdminUsersTable = () => {
   const [searchOn, setSearchOn] = useState("");
   const axiosSecure = useAxiosSecure();
-  const [itemsPerPage, setItemsPerPage] = useState(2);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: useCounts } = useQuery({
     queryKey: ["useCounts"],

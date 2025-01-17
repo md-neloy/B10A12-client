@@ -43,8 +43,8 @@ const MyClass = () => {
   }
   return (
     <div>
-      <div className="p-5">
-        <SectionHeader title={"Your Enroll Classes"} />
+      <div className="p-5 ">
+        <SectionHeader title={"My Classes"} />
         {classes?.length === 0 ? (
           <p className="text-red-600 text-xl text-center mt-4">
             You Didn&apos;t add any class Yet

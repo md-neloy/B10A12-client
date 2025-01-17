@@ -43,8 +43,11 @@ const StudentEnrollClass = () => {
 
   return (
     <div>
-      <div className="p-5">
+      <div className="p-5 relative">
         <SectionHeader title={"Your Enroll Classes"} />
+        <button className="btn btn-primary absolute left-5 top-4">
+          FeedBack
+        </button>
         {classes?.length === 0 ? (
           <p className="text-red-600 text-xl text-center mt-4">
             You Have Not Enrolled Yet

@@ -5,7 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 const EnrollClassCard = ({ item }) => {
   const { title, name, image, onContinue } = item;
   return (
-    <div className="card w-full bg-base-100 shadow-xl">
+    <div className="card w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl">
       {/* Image Section */}
       <figure>
         <img
