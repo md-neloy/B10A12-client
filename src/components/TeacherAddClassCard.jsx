@@ -5,9 +5,9 @@ import { FaUserCircle } from "react-icons/fa";
 import TeacherClsDetaisModal from "./TeacherClsDetaisModal";
 import useAxiosSecure from "../useHooks/useAxiosSecure";
 import useContexHooks from "../useHooks/useContexHooks";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
-const TeacherAddClassCard = ({ item }) => {
+const TeacherAddClassCard = ({ item, refetch }) => {
   const { title, name, email, price, description, image, status } = item;
   const [selectedClass, setSelectedClass] = useState(null);
   const { user } = useContexHooks();
@@ -19,15 +19,32 @@ const TeacherAddClassCard = ({ item }) => {
     setSelectedClass(null);
   };
   const onDelete = (id) => {
-    axiosSecure
-      .delete(`/delete-class/${id}?email=${user?.email}`)
-      .then((res) => {
-        console.log(res);
-        if (res.data.deletedCount > 0) {
-          toast.success("successfully delete the class");
-        }
-      })
-      .catch((err) => console.log(err));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/delete-class/${id}?email=${user?.email}`)
+          .then((res) => {
+            console.log(res);
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    });
   };
 
   return (
@@ -94,7 +111,11 @@ const TeacherAddClassCard = ({ item }) => {
         </div>
       </div>
       {selectedClass && (
-        <TeacherClsDetaisModal classData={selectedClass} onClose={closeModal} />
+        <TeacherClsDetaisModal
+          classData={selectedClass}
+          refetch={refetch}
+          onClose={closeModal}
+        />
       )}
     </div>
   );
@@ -102,6 +123,7 @@ const TeacherAddClassCard = ({ item }) => {
 
 TeacherAddClassCard.propTypes = {
   item: PropTypes.object,
+  refetch: PropTypes.func,
   // onViewDetails: PropTypes.func.isRequired,
 };
 

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const EnrollClassCard = ({ item }) => {
   const { title, name, image, onContinue } = item;
@@ -25,12 +26,13 @@ const EnrollClassCard = ({ item }) => {
         </div>
         {/* Continue Button */}
         <div className="card-actions mt-4">
-          <button
+          <Link
+            to={`/dashboard/myenroll-class/${item._id}`}
             className="btn btn-primary btn-sm flex items-center gap-2"
             onClick={onContinue}
           >
             Continue <AiOutlineArrowRight size={16} />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

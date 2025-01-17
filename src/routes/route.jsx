@@ -10,7 +10,6 @@ import TeachOn from "../Pages/TechOn/TechOn";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Details from "../Pages/Details/Details";
 import Payment from "../Pages/Payment/Payment";
-import StudentEnrollClass from "../Pages/Dashboard/dashboardPages/studentEnrollClass";
 import Profile from "../Pages/Profile/Profile";
 import AddClass from "../Pages/Dashboard/dashboardPages/AddClass";
 import TeacherRoute from "../privateRouts/TeacherRoute";
@@ -19,6 +18,9 @@ import AdminRoute from "../privateRouts/AdminRoute";
 import Allusers from "../Pages/Dashboard/dashboardPages/Allusers";
 import AllAdimClasses from "../Pages/Dashboard/dashboardPages/AllAdimClasses";
 import TeacherRq from "../Pages/Dashboard/dashboardPages/TeacherRq";
+import StudentEnrollClass from "../Pages/Dashboard/dashboardPages/StudentEnrollClass";
+import SeeProgressByAdmin from "../Pages/Dashboard/dashboardPages/SeeProgressByAdmin";
+import EnrollClassDetailsPage from "../components/EnrollClassDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +87,14 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "myenroll-class/:id",
+        element: (
+          <PrivateRoute>
+            <EnrollClassDetailsPage />
+          </PrivateRoute>
+        ),
+      },
       // dashboard teacher route
       {
         path: "addclass",
@@ -116,6 +126,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllAdimClasses />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "seeprogress/:id",
+        element: (
+          <AdminRoute>
+            <SeeProgressByAdmin />
           </AdminRoute>
         ),
       },

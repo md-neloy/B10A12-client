@@ -3,13 +3,14 @@ import PreLoader from "../../../components/PreLoader";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import SeeProgressByAdmin from "./SeeProgressByAdmin";
+import { Link } from "react-router-dom";
+// import SeeProgressByAdmin from "./SeeProgressByAdmin";
 
 const AllAdminClasses = () => {
   const axiosSecure = useAxiosSecure();
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedClass, setSelectedClass] = useState(null);
+  // const [selectedClass, setSelectedClass] = useState(null);
 
   const { data: classCount } = useQuery({
     queryKey: ["classCount"],
@@ -84,13 +85,13 @@ const AllAdminClasses = () => {
     setCurrentPage(1);
   };
 
-  const openModal = (classItem) => {
-    setSelectedClass(classItem);
-  };
+  // const openModal = (classItem) => {
+  //   setSelectedClass(classItem);
+  // };
 
-  const closeModal = () => {
-    setSelectedClass(null);
-  };
+  // const closeModal = () => {
+  //   setSelectedClass(null);
+  // };
 
   return (
     <div>
@@ -136,13 +137,14 @@ const AllAdminClasses = () => {
 
                 {/* Progress */}
                 <td className="px-4 py-3 text-center">
-                  <button
+                  <Link
+                    to={`/dashboard/seeprogress/${classItem._id}`}
                     disabled={classItem.status !== "approved"}
                     className="btn btn-sm bg-green-500 text-white hover:bg-green-600 px-3 py-1 rounded-md"
-                    onClick={() => openModal(classItem)}
+                    // onClick={() => openModal(classItem)}
                   >
                     See Progress
-                  </button>
+                  </Link>
                 </td>
 
                 {/* Actions */}
@@ -232,14 +234,6 @@ const AllAdminClasses = () => {
           </div>
         </div>
       </div>
-
-      {/* Modal */}
-      {selectedClass && (
-        <SeeProgressByAdmin
-          classData={selectedClass} // Pass the selected class data
-          onClose={closeModal}
-        />
-      )}
     </div>
   );
 };

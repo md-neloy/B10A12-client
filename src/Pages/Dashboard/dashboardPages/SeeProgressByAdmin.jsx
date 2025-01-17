@@ -1,21 +1,31 @@
 import PropTypes from "prop-types";
 import TeacherAddClassCard from "../../../components/TeacherAddClassCard";
+import useAxiosSecure from "../../../useHooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import PreLoader from "../../../components/PreLoader";
 
-const SeeProgressByAdmin = ({ classData, onClose }) => {
-  if (!classData) return null; // Ensure the modal only renders if data exists.
-
+const SeeProgressByAdmin = () => {
+  const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
+  const {
+    data: classData,
+    refetch,
+    isFetching,
+  } = useQuery({
+    queryKey: ["classData"],
+    queryFn: async () => {
+      const result = await axiosSecure.get(`/classes/${id}`);
+      return result.data;
+    },
+  });
+  if (isFetching) {
+    return <PreLoader />;
+  }
+  console.log(classData);
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <dialog className="modal open" open>
-        <div className="modal-box w-11/12 max-w-5xl">
-          <TeacherAddClassCard item={classData} />
-          <div className="modal-action">
-            <button className="btn" onClick={onClose}>
-              Close
-            </button>
-          </div>
-        </div>
-      </dialog>
+    <div className="p-5">
+      <TeacherAddClassCard refetch={refetch} item={classData} />
     </div>
   );
 };
@@ -24,5 +34,5 @@ export default SeeProgressByAdmin;
 
 SeeProgressByAdmin.propTypes = {
   classData: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired,
+  refetch: PropTypes.func,
 };

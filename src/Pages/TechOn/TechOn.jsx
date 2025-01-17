@@ -143,7 +143,7 @@ const TeachOn = () => {
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-sm md:text-base">
-                  Profile Image
+                  Add Image
                 </span>
               </label>
               <div className="input-group">
