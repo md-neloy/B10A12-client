@@ -2,9 +2,11 @@ import PropTypes from "prop-types";
 import PreLoader from "./PreLoader";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../useHooks/useAxiosSecure";
+import useContexHooks from "../useHooks/useContexHooks";
 
-const TeacherClassAssignmentCreate = ({ classId }) => {
+const TeacherClassAssignmentList = ({ classId }) => {
   const AxiosSecure = useAxiosSecure();
+  const { user } = useContexHooks();
   const {
     data: classAssignments = [],
     isFetching,
@@ -12,8 +14,10 @@ const TeacherClassAssignmentCreate = ({ classId }) => {
   } = useQuery({
     queryKey: ["classAssignments", classId],
     queryFn: async () => {
-      const res = await AxiosSecure.get(`/classes/${classId}`);
-      return res.data.assignments; // Assuming assignments are inside `res.data.assignments`
+      const res = await AxiosSecure.get(
+        `/find-assignment/${classId}?email=${user?.email}`
+      );
+      return res.data; // Assuming assignments are inside `res.data.assignments`
     },
   });
 
@@ -53,7 +57,7 @@ const TeacherClassAssignmentCreate = ({ classId }) => {
               <td>{assignment.description || "N/A"}</td>
               <td>{assignment.mark || "N/A"}</td>
               <td>{assignment.submits || 0}</td>
-              <td>{assignment.lastDate || "N/A"}</td>
+              <td>{assignment.deadline || "N/A"}</td>
               <td className="text-center">
                 <button className="btn btn-success btn-sm">Check</button>
               </td>
@@ -65,8 +69,8 @@ const TeacherClassAssignmentCreate = ({ classId }) => {
   );
 };
 
-TeacherClassAssignmentCreate.propTypes = {
+TeacherClassAssignmentList.propTypes = {
   classId: PropTypes.string.isRequired,
 };
 
-export default TeacherClassAssignmentCreate;
+export default TeacherClassAssignmentList;

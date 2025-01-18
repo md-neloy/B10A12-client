@@ -1,15 +1,49 @@
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../useHooks/useAxiosSecure";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import useContexHooks from "../useHooks/useContexHooks";
 
 const TeacherCreateAsignModal = ({ classId, closeModal }) => {
+  const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
+  const { user } = useContexHooks();
+  const createPost = async (newpost) => {
+    const res = await axiosSecure.post(
+      `/add-assignment?email=${user?.email}`,
+      newpost
+    );
+    return res.data;
+  };
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
+  const mutation = useMutation({
+    mutationFn: createPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["teacherPosts"]);
+      toast.success("Your application has been submitted successfully!", {
+        position: "top-center",
+      });
+      reset();
+    },
+    onError: (error) => {
+      toast.error(`Submission failed: ${error.message}`, {
+        position: "top-center",
+      });
+    },
+  });
+
   const onSubmit = (data) => {
     console.log(data);
+    data.classId = classId;
+    mutation.mutateAsync(data);
   };
   return (
     <div>
@@ -113,7 +147,10 @@ const TeacherCreateAsignModal = ({ classId, closeModal }) => {
 
             {/* Add Assignment Button */}
             <div className="text-right">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="bg-[#4CAF50] hover:bg-[#388E3C] w-full  text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center"
+              >
                 Add Assignment
               </button>
             </div>

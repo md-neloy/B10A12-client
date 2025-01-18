@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import TeacherClassProgress from "../../../components/TeacherClassProgress";
-import TeacherClassAssignmentCreate from "../../../components/TeacherClassAssignmetCreate";
 import PreLoader from "../../../components/PreLoader";
+import TeacherClassAssignmentList from "../../../components/TeacherClassAssignmetList";
 
 const TeacherSeeDetails = () => {
   const { id } = useParams();
@@ -31,12 +31,10 @@ const TeacherSeeDetails = () => {
   }
   return (
     <div className="p-5">
-      <h2>Teacher See details</h2>
-      <h3>{id}</h3>
       <TeacherClassProgress classData={classData} />
-      {/* <div>
-        <TeacherClassAssignmentCreate classId={id} />
-      </div> */}
+      <div>
+        <TeacherClassAssignmentList classId={id} />
+      </div>
     </div>
   );
 };

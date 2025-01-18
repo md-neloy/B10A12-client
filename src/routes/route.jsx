@@ -116,9 +116,9 @@ const router = createBrowserRouter([
       {
         path: "teacherSeeDetails/:id",
         element: (
-          <TeacherRoute>
+          <PrivateRoute>
             <TeacherSeeDetails />
-          </TeacherRoute>
+          </PrivateRoute>
         ),
       },
       // dashboard admin route
