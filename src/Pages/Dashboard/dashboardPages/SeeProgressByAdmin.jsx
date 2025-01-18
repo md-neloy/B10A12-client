@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import TeacherAddClassCard from "../../../components/TeacherAddClassCard";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -31,8 +30,3 @@ const SeeProgressByAdmin = () => {
 };
 
 export default SeeProgressByAdmin;
-
-SeeProgressByAdmin.propTypes = {
-  classData: PropTypes.object.isRequired,
-  refetch: PropTypes.func,
-};

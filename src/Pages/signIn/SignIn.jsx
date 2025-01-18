@@ -73,12 +73,14 @@ const SignIn = () => {
     googleLogin()
       .then((result) => {
         const user = result.user;
+
         const userInfo = {
           name: user.displayName,
           email: user.email,
           image: user.photoURL,
           role: "student",
         };
+        console.log(userInfo);
         mutation.mutateAsync(userInfo);
         if (location.state) {
           navigate(location.state);

@@ -20,8 +20,8 @@ import AllAdimClasses from "../Pages/Dashboard/dashboardPages/AllAdimClasses";
 import TeacherRq from "../Pages/Dashboard/dashboardPages/TeacherRq";
 import StudentEnrollClass from "../Pages/Dashboard/dashboardPages/StudentEnrollClass";
 import SeeProgressByAdmin from "../Pages/Dashboard/dashboardPages/SeeProgressByAdmin";
-import EnrollClassDetailsPage from "../components/EnrollClassDetailsPage";
 import TeacherSeeDetails from "../Pages/Dashboard/dashboardPages/TeacherSeeDetails";
+import EnrollAssignmentTable from "../components/EnrollAssignmentTable";
 
 const router = createBrowserRouter([
   {
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
         path: "myenroll-class/:id",
         element: (
           <PrivateRoute>
-            <EnrollClassDetailsPage />
+            <EnrollAssignmentTable />
           </PrivateRoute>
         ),
       },

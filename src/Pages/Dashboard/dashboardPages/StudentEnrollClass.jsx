@@ -9,6 +9,7 @@ const StudentEnrollClass = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContexHooks();
 
+  console.log(user?.email);
   const {
     data: classes,
     isFetching,
@@ -26,8 +27,7 @@ const StudentEnrollClass = () => {
       }
     },
   });
-
-  console.log(classes?.length);
+  console.log(classes);
 
   if (isFetching) {
     return <PreLoader />;

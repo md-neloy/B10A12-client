@@ -104,10 +104,13 @@ const TeacherAddClassCard = ({ item, refetch }) => {
             <button
               // onClick={onViewDetails}
               disabled={item.status !== "approved"}
-              className="btn bg-gray-100 hover:bg-gray-200 w-full md:w-fit text-gray-800 rounded-lg px-4 py-2 shadow-md flex items-center gap-2 transition"
+              className="btn bg-gray-100 hover:bg-gray-200 w-full md:w-fit text-gray-800 rounded-lg  shadow-md p-0 transition"
             >
-              <Link to={`/dashboard/teacherSeeDetails/${item._id}`}>
-                See Details <AiOutlineArrowRight size={16} />
+              <Link
+                to={`/dashboard/teacherSeeDetails/${item._id}`}
+                className="px-4 py-2  flex gap-2"
+              >
+                <span>See Details</span> <AiOutlineArrowRight size={16} />
               </Link>
             </button>
           </div>

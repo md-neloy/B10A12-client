@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const EnrollClassCard = ({ item }) => {
-  const { title, name, image, onContinue } = item;
+  const { title, name, image } = item;
   return (
     <div className="card w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl">
       {/* Image Section */}
@@ -29,7 +29,6 @@ const EnrollClassCard = ({ item }) => {
           <Link
             to={`/dashboard/myenroll-class/${item._id}`}
             className="btn btn-primary btn-sm flex items-center gap-2"
-            onClick={onContinue}
           >
             Continue <AiOutlineArrowRight size={16} />
           </Link>
