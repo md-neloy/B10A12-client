@@ -3,7 +3,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "./Checkout";
 import Container from "../../Sharecomponent/Container";
 import { useParams } from "react-router-dom";
-// TODO;
+// done;
 const stiprePromise = loadStripe(import.meta.env.VITE_stripe_publishabel_key);
 const Payment = () => {
   const { id } = useParams();

@@ -21,6 +21,7 @@ import TeacherRq from "../Pages/Dashboard/dashboardPages/TeacherRq";
 import StudentEnrollClass from "../Pages/Dashboard/dashboardPages/StudentEnrollClass";
 import SeeProgressByAdmin from "../Pages/Dashboard/dashboardPages/SeeProgressByAdmin";
 import EnrollClassDetailsPage from "../components/EnrollClassDetailsPage";
+import TeacherSeeDetails from "../Pages/Dashboard/dashboardPages/TeacherSeeDetails";
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,14 @@ const router = createBrowserRouter([
         element: (
           <TeacherRoute>
             <MyClass />
+          </TeacherRoute>
+        ),
+      },
+      {
+        path: "teacherSeeDetails/:id",
+        element: (
+          <TeacherRoute>
+            <TeacherSeeDetails />
           </TeacherRoute>
         ),
       },
