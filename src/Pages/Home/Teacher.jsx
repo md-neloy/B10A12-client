@@ -35,6 +35,7 @@ const Teacher = () => {
                     <Button
                       text="Became a Teacher"
                       width="100%"
+                      link="/techon"
                       logo={<FaChalkboardTeacher />}
                     />
                   </div>

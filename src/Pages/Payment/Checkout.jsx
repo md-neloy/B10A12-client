@@ -8,6 +8,7 @@ import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import PreLoader from "../../components/PreLoader";
 
 const Checkout = ({ ids }) => {
   const [clientSecret, setClientSecret] = useState(null);
@@ -22,14 +23,15 @@ const Checkout = ({ ids }) => {
 
   const { handleSubmit, reset } = useForm();
 
-  // Mutation for creating the payment intent
-  const createPost = async (newPost) => {
-    const res = await axiosSecure.post("/create-payment-intent", newPost);
+  // Function to create payment intent (wrapped in a stable function)
+  const createPaymentIntent = async (price) => {
+    const res = await axiosSecure.post("/create-payment-intent", { price });
     return res.data;
   };
 
+  // Mutation for creating the payment intent
   const mutation = useMutation({
-    mutationFn: createPost,
+    mutationFn: createPaymentIntent,
     onSuccess: (data) => {
       setClientSecret(data.clientSecret); // Set clientSecret in state
     },
@@ -40,12 +42,16 @@ const Checkout = ({ ids }) => {
     },
   });
 
-  // Create the clientSecret when the component mounts
+  // Create the clientSecret when the component mounts or enrollPrice changes
   useEffect(() => {
-    if (!clientSecret && enrollPrice) {
-      mutation.mutateAsync({ price: parseInt(enrollPrice) });
+    if (enrollPrice && !clientSecret) {
+      mutation.mutate(parseInt(enrollPrice));
     }
-  }, [clientSecret, enrollPrice, mutation]);
+  }, [enrollPrice, clientSecret]);
+
+  if (!enrollPrice) {
+    return <PreLoader />;
+  }
 
   const onSubmit = async () => {
     if (isProcessing) return;

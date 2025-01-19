@@ -42,6 +42,7 @@ const TeacherCreateAsignModal = ({ classId, closeModal }) => {
 
   const onSubmit = (data) => {
     data.classId = classId;
+    data.submitedAssignments = 0;
     mutation.mutateAsync(data);
   };
   return (

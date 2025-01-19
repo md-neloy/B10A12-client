@@ -49,7 +49,7 @@ const Navbar = () => {
               : "text-white hover:text-yellow-400 font-bold"
           }
         >
-          Tech on SmartLearning
+          Teach on SmartLearning
         </NavLink>
       </li>
     </>

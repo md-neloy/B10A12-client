@@ -44,8 +44,8 @@ const EnrollAssignmentTable = () => {
   });
 
   const numOfData = assignments?.length || 0;
-  const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1;
-  const pages = [...Array(numberOfPages).keys()];
+  const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1; // 10
+  const pages = [...Array(numberOfPages).keys()]; // 1,2,3...
 
   if (isLoading) {
     return <PreLoader />;

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import useContexHooks from "./useContexHooks";
 
 const axiosSecure = axios.create({
-  baseURL: "https://server-12-virid.vercel.app",
+  baseURL: "https://server-12-two.vercel.app",
+  // baseURL: "http://localhost:5050",
 });
 const useAxiosSecure = () => {
   const navigate = useNavigate();

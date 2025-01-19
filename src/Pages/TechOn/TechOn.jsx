@@ -9,15 +9,18 @@ import imageUpload from "../../useHooks/imageUpload";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import PreLoader from "../../components/PreLoader";
+import useAdmin from "../../privateRouts/useAdmin";
 
 const TeachOn = () => {
   const { user } = useContexHooks();
   const axiosSecure = useAxiosSecure();
+  const [isAdmin] = useAdmin();
 
   const {
     data: isTeacher,
     isFetching,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
@@ -53,6 +56,7 @@ const TeachOn = () => {
         position: "top-center",
       });
       reset();
+      refetch();
     },
     onError: (error) => {
       toast.error(`Submission failed: ${error.message}`, {
@@ -252,7 +256,8 @@ const TeachOn = () => {
                 disabled={
                   mutation.isLoading ||
                   isTeacher === "pending" ||
-                  isTeacher === "approved"
+                  isTeacher === "approved" ||
+                  isAdmin
                 } // Disable the button while loading
               >
                 {/* ? "Wait for the review":isTeacher === 'teacher'?"You are now Teacher":isTeacher === false? */}

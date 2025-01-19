@@ -76,7 +76,7 @@ const SignIn = () => {
 
         const userInfo = {
           name: user.displayName,
-          email: user.email,
+          email: user.email.toLowerCase(),
           image: user.photoURL,
           role: "student",
         };

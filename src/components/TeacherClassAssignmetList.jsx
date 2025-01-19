@@ -87,7 +87,7 @@ const TeacherClassAssignmentList = ({ classId }) => {
               <td>{assignment.title || "N/A"}</td>
               <td>{assignment.description || "N/A"}</td>
               <td>{assignment.mark || "N/A"}</td>
-              <td>{assignment.submits || 0}</td>
+              <td>{assignment.submitedAssignments || 0}</td>
               <td>{assignment.deadline || "N/A"}</td>
               <td className="text-center">
                 <button
