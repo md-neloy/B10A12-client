@@ -130,7 +130,10 @@ const TeacherClsDetaisModal = ({ classData, refetch, onClose }) => {
             </div>
 
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary w-full">
+              <button
+                type="submit"
+                className="bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center"
+              >
                 Add Class
               </button>
             </div>

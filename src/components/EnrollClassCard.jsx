@@ -28,7 +28,7 @@ const EnrollClassCard = ({ item }) => {
         <div className="card-actions mt-4">
           <Link
             to={`/dashboard/myenroll-class/${item._id}`}
-            className="btn btn-primary btn-sm flex items-center gap-2"
+            className="flex gap-2 justify-center items-center bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-6 py-3 rounded-lg text-lg font-bold transition-all text-center "
           >
             Continue <AiOutlineArrowRight size={16} />
           </Link>

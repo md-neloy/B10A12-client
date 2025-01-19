@@ -5,41 +5,48 @@ import useAxiosSecure from "../useHooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-const EnrollmentSubmitionModal = ({ assignmentId, closeModal, refetch }) => {
+const EnrollmentSubmitionModal = ({
+  assignmentId,
+  classId,
+  closeModal,
+  refetch,
+}) => {
   const { user } = useContexHooks();
   const AxiosSecure = useAxiosSecure();
 
   const createPorst = async (newpost) => {
-    const res = await AxiosSecure.post(``, newpost);
+    const res = await AxiosSecure.post(`/assignment-submit`, newpost);
     return res.data;
   };
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const mutation = useMutation({
     mutationFn: createPorst,
     onSuccess: () => {
       toast.success("Submission successful!");
       refetch();
+      reset();
     },
     onError: () => {
       toast.error("Failed to submit assignment.");
     },
   });
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
-
   const handleAssignment = (data) => {
     console.log(data, assignmentId);
     const info = {
       assignmentId,
+      classId,
       email: user?.email,
       assignment_url: data.assignmentUrl,
     };
     console.log(info);
-    // mutation.mutateAsync(info);
+    mutation.mutateAsync(info);
   };
 
   return (
@@ -98,6 +105,7 @@ const EnrollmentSubmitionModal = ({ assignmentId, closeModal, refetch }) => {
 
 EnrollmentSubmitionModal.propTypes = {
   assignmentId: PropTypes.string,
+  classId: PropTypes.string,
   closeModal: PropTypes.func,
   refetch: PropTypes.func,
 };
