@@ -10,15 +10,19 @@ const TeacherClassAssignmentList = ({ classId }) => {
   const AxiosSecure = useAxiosSecure();
   const { user } = useContexHooks();
   const [openmodal, setOpenModal] = useState(null);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const {
     data: classAssignments = [],
     isFetching,
     error,
   } = useQuery({
-    queryKey: ["classAssignments", classId],
+    queryKey: ["classAssignments", classId, itemsPerPage, currentPage],
     queryFn: async () => {
       const res = await AxiosSecure.get(
-        `/find-assignment/${classId}?email=${user?.email}`
+        `/find-assignment/${classId}?email=${user?.email}&page=${
+          currentPage - 1
+        }&limit=${itemsPerPage}`
       );
       return res.data; // Assuming assignments are inside `res.data.assignments`
     },
@@ -35,8 +39,25 @@ const TeacherClassAssignmentList = ({ classId }) => {
       </p>
     );
   }
+
+  const numOfData = classAssignments?.length || 0;
+  const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1;
+  const pages = [...Array(numberOfPages).keys()];
+
+  // Handle change in items per page
+  const handleItemsPerPageChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    setItemsPerPage(value);
+    setCurrentPage(1);
+  };
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   const checkAssignmetSubmission = (assignmentId) => {
-    console.log(assignmentId);
+    // console.log(assignmentId);
     setOpenModal(assignmentId);
   };
   const closeModal = () => {
@@ -80,6 +101,67 @@ const TeacherClassAssignmentList = ({ classId }) => {
           ))}
         </tbody>
       </table>
+      <div className="pagination py-4">
+        {/* Pagination Buttons */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <button
+            className="btn btn-square"
+            onClick={() => {
+              if (currentPage > 1) handlePageChange(currentPage - 1);
+            }}
+          >
+            Prev
+          </button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={
+                currentPage === page + 1
+                  ? `bg-[#4CAF50] hover:bg-[#388E3C] text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center`
+                  : "btn btn-outline"
+              }
+              onClick={() => handlePageChange(page + 1)}
+            >
+              {page + 1}
+            </button>
+          ))}
+          <button
+            className="btn btn-square"
+            onClick={() => {
+              if (currentPage < numberOfPages)
+                handlePageChange(currentPage + 1);
+            }}
+          >
+            Next
+          </button>
+          {/* Items Per Page Dropdown */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "12px",
+            }}
+          >
+            <select
+              value={itemsPerPage}
+              onChange={handleItemsPerPageChange}
+              name="itemsPerPage"
+            >
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
+          </div>
+        </div>
+      </div>
       {openmodal && (
         <AssignmentCheckModal
           assignmentId={openmodal}

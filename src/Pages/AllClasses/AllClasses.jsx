@@ -48,8 +48,8 @@ const AllClasses = () => {
   // Handle change in items per page
   const handleItemsPerPageChange = (e) => {
     const value = parseInt(e.target.value, 10);
-    setItemsPerPage(value); // Update itemsPerPage
-    setCurrentPage(1); // Reset to first page
+    setItemsPerPage(value);
+    setCurrentPage(1);
   };
 
   // Handle page change

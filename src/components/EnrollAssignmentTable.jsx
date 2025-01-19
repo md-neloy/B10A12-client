@@ -15,6 +15,8 @@ const EnrollAssignmentTable = () => {
   const AxiosSecure = useAxiosSecure();
   const [openModal, setOpenModal] = useState(null);
   const [modalFeedback, setmodalFeedback] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const handleOpenModal = (assignmentId) => {
     setOpenModal(assignmentId);
   };
@@ -30,14 +32,20 @@ const EnrollAssignmentTable = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["assignments", id],
+    queryKey: ["assignments", id, itemsPerPage, currentPage],
     queryFn: async () => {
       const response = await AxiosSecure.get(
-        `/find-assignment/${id}?email=${user?.email}`
+        `/find-assignment/${id}?email=${user?.email}&page=${
+          currentPage - 1
+        }&limit=${itemsPerPage}`
       );
       return response.data;
     },
   });
+
+  const numOfData = assignments?.length || 0;
+  const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1;
+  const pages = [...Array(numberOfPages).keys()];
 
   if (isLoading) {
     return <PreLoader />;
@@ -52,6 +60,18 @@ const EnrollAssignmentTable = () => {
   };
   const closeFeedbackModal = () => {
     setmodalFeedback(false);
+  };
+
+  // Handle change in items per page
+  const handleItemsPerPageChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    setItemsPerPage(value);
+    setCurrentPage(1);
+  };
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -111,6 +131,67 @@ const EnrollAssignmentTable = () => {
               })}
             </tbody>
           </table>
+          <div className="pagination py-4">
+            {/* Pagination Buttons */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "12px",
+              }}
+            >
+              <button
+                className="btn btn-square"
+                onClick={() => {
+                  if (currentPage > 1) handlePageChange(currentPage - 1);
+                }}
+              >
+                Prev
+              </button>
+              {pages.map((page) => (
+                <button
+                  key={page}
+                  className={
+                    currentPage === page + 1
+                      ? `bg-[#4CAF50] hover:bg-[#388E3C] text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center`
+                      : "btn btn-outline"
+                  }
+                  onClick={() => handlePageChange(page + 1)}
+                >
+                  {page + 1}
+                </button>
+              ))}
+              <button
+                className="btn btn-square"
+                onClick={() => {
+                  if (currentPage < numberOfPages)
+                    handlePageChange(currentPage + 1);
+                }}
+              >
+                Next
+              </button>
+              {/* Items Per Page Dropdown */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "12px",
+                }}
+              >
+                <select
+                  value={itemsPerPage}
+                  onChange={handleItemsPerPageChange}
+                  name="itemsPerPage"
+                >
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </>
       ) : (
         <>
