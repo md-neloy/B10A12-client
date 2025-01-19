@@ -103,11 +103,10 @@ const FeedbackModal = ({ classId, closeFeedbackModal }) => {
                 })}
                 placeholder="Enter your feedback here..."
                 className="textarea textarea-bordered w-full h-24"
+                required
               />
               {errors && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.description.message}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
               )}
             </div>
 
