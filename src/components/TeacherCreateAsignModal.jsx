@@ -41,7 +41,6 @@ const TeacherCreateAsignModal = ({ classId, closeModal }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     data.classId = classId;
     mutation.mutateAsync(data);
   };
@@ -49,7 +48,6 @@ const TeacherCreateAsignModal = ({ classId, closeModal }) => {
     <div>
       <dialog id="my_modal_4" className="modal" open>
         <div className="modal-box w-11/12 max-w-5xl">
-          <h3 className="font-bold text-lg">{classId}</h3>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="p-6 bg-white rounded shadow-md"

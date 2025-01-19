@@ -6,13 +6,12 @@ import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
 import useContexHooks from "../../useHooks/useContexHooks";
 import imageUpload from "../../useHooks/imageUpload";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import PreLoader from "../../components/PreLoader";
 
 const TeachOn = () => {
   const { user } = useContexHooks();
-  const queryClient = useQueryClient();
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -50,7 +49,6 @@ const TeachOn = () => {
   const mutation = useMutation({
     mutationFn: createPost,
     onSuccess: () => {
-      queryClient.invalidateQueries(["teacherPosts"]);
       toast.success("Your application has been submitted successfully!", {
         position: "top-center",
       });

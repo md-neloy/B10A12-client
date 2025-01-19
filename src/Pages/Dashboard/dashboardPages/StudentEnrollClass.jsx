@@ -27,7 +27,7 @@ const StudentEnrollClass = () => {
       }
     },
   });
-  console.log(classes);
+  // console.log(classes);
 
   if (isFetching) {
     return <PreLoader />;

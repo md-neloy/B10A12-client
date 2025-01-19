@@ -6,12 +6,15 @@ import EnrollmentSubmitionModal from "./EnrollmentSubmitionModal";
 import useContexHooks from "../useHooks/useContexHooks";
 import { format, parseISO } from "date-fns";
 import SectionHeader from "./SectionHeader";
+import FeedbackModal from "./FeedbackModal";
+import PreLoader from "./PreLoader";
 
 const EnrollAssignmentTable = () => {
   const { id } = useParams(); //classid
   const { user } = useContexHooks();
   const AxiosSecure = useAxiosSecure();
   const [openModal, setOpenModal] = useState(null);
+  const [modalFeedback, setmodalFeedback] = useState(false);
   const handleOpenModal = (assignmentId) => {
     setOpenModal(assignmentId);
   };
@@ -37,26 +40,34 @@ const EnrollAssignmentTable = () => {
   });
 
   if (isLoading) {
-    return <p>Loading assignments...</p>;
+    return <PreLoader />;
   }
 
   if (isError) {
     return <p className="text-red-500">Error: {error.message}</p>;
   }
   const currentDate = format(new Date(), "yyyy-MM-dd");
-  console.log(currentDate);
+  const feedbackModal = () => {
+    setmodalFeedback(true);
+  };
+  const closeFeedbackModal = () => {
+    setmodalFeedback(false);
+  };
 
   return (
-    <div className="overflow-x-auto mt-6">
+    <div className="overflow-x-auto p-5">
       <SectionHeader title={"Class Assignment"} />
-      <button className="bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center">
+      <button
+        onClick={feedbackModal}
+        className="bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-6 py-3 mb-3 rounded-lg text-lg font-bold transition-all text-center"
+      >
         FeedBack
       </button>
       {assignments.length > 0 ? (
         <>
-          <table className="table table-zebra w-full">
+          <table className="table table-zebra w-full border border-[#4CAF50]">
             {/* Table Header */}
-            <thead>
+            <thead className="bg-[#4CAF50] text-white">
               <tr>
                 <th className="text-left">#</th>
                 <th className="text-left">Title</th>
@@ -66,7 +77,7 @@ const EnrollAssignmentTable = () => {
               </tr>
             </thead>
             {/* Table Body */}
-            <tbody>
+            <tbody className="border">
               {assignments.map((assignment, index) => {
                 const deadlineDate = format(
                   parseISO(assignment.deadline),
@@ -89,7 +100,7 @@ const EnrollAssignmentTable = () => {
                       {/* Submit Button */}
                       <button
                         disabled={isPastDeadline}
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-primary btn-sm bg-[#4CAF50] border-[#4CAF50] hover:bg-green-700 font-bold hover:border-green-700"
                         onClick={() => handleOpenModal(assignment._id)}
                       >
                         Submit
@@ -116,6 +127,9 @@ const EnrollAssignmentTable = () => {
           assignmentId={openModal}
           closeModal={closeModal}
         />
+      )}
+      {modalFeedback && (
+        <FeedbackModal classId={id} closeFeedbackModal={closeFeedbackModal} />
       )}
     </div>
   );

@@ -54,7 +54,7 @@ const EnrollmentSubmitionModal = ({
       <dialog id="my_modal_4" className="modal" open>
         <div className="modal-box w-11/12 max-w-4xl rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-6 text-center">
-            Submit Your Assignment {assignmentId}
+            Submit Your Assignment
           </h2>
           <form onSubmit={handleSubmit(handleAssignment)} className="space-y-4">
             <div className="form-control">
@@ -91,7 +91,7 @@ const EnrollmentSubmitionModal = ({
           </form>
           <div className="modal-action mt-4">
             <button
-              className="btn btn-secondary py-2 px-4 rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-200"
+              className="btn btn-secondary py-2 px-4 rounded-md border-[#4CAF50] text-gray-700 bg-gray-200 hover:bg-[#4CAF50] hover:border-[#4CAF50] transition duration-200"
               onClick={closeModal}
             >
               Close
