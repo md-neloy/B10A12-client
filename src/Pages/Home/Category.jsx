@@ -38,33 +38,35 @@ const Category = () => {
           <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 text-gray-800">
             Explore Categories
           </h2>
-          <Swiper
-            slidesPerView={3}
-            grid={{
-              cols: 4,
-              rows: 2,
-              fill: "row",
-            }}
-            spaceBetween={30}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[Grid, Pagination]}
-            className="mySwiper"
-          >
-            {categories.map((category, index) => (
-              <SwiperSlide key={index}>
-                <div className="flex flex-col items-center p-6 bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="text-4xl text-[#212529] mb-4">
-                    {category.icon}
+          <div className="w-full">
+            <Swiper
+              slidesPerView={2}
+              grid={{
+                cols: 4,
+                rows: 2,
+                fill: "row",
+              }}
+              spaceBetween={30}
+              pagination={{
+                clickable: true,
+              }}
+              modules={[Grid, Pagination]}
+              className="mySwiper"
+            >
+              {categories.map((category, index) => (
+                <SwiperSlide key={index}>
+                  <div className="flex flex-col items-center p-6 bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div className="text-4xl text-[#212529] mb-4">
+                      {category.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-700">
+                      {category.name}
+                    </h3>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-700">
-                    {category.name}
-                  </h3>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </Container>
     </section>

@@ -27,7 +27,7 @@ const Footer = () => {
             </div>
 
             {/* Navigation Links */}
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-start items-start md:items-center">
               <ul className="flex flex-col gap-2">
                 <li className="text-lg font-semibold mb-4">Quick Links</li>
                 <li>
@@ -83,7 +83,7 @@ const Footer = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-start items-center">
               <ul className="flex flex-col gap-3 justify-center w-full">
                 <li className="text-lg font-semibold mb-4">Contact Us</li>
                 <li className="flex items-center gap-2 w-fit">
