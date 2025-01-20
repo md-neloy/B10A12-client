@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 
 const TeacherRq = () => {
   const axiosSecure = useAxiosSecure();
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: counts } = useQuery({
     queryKey: ["counts"],

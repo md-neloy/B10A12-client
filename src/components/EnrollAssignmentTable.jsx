@@ -76,7 +76,7 @@ const EnrollAssignmentTable = () => {
   };
 
   return (
-    <div className="overflow-x-auto p-5">
+    <div className=" p-5">
       <Helmet>
         <title>SmartLearning | Class Assignment</title>
       </Helmet>
@@ -89,52 +89,54 @@ const EnrollAssignmentTable = () => {
       </button>
       {assignments.length > 0 ? (
         <>
-          <table className="table table-zebra w-full border border-[#4CAF50]">
-            {/* Table Header */}
-            <thead className="bg-[#4CAF50] text-white">
-              <tr>
-                <th className="text-left">#</th>
-                <th className="text-left">Title</th>
-                <th className="text-left">Description</th>
-                <th className="text-left">Deadline</th>
-                <th className="text-center">Submission</th>
-              </tr>
-            </thead>
-            {/* Table Body */}
-            <tbody className="border">
-              {assignments.map((assignment, index) => {
-                const deadlineDate = format(
-                  parseISO(assignment.deadline),
-                  "yyyy-MM-dd"
-                );
-                const isPastDeadline = currentDate > deadlineDate;
-                return (
-                  <tr key={assignment._id}>
-                    <th>{index + 1}</th>
-                    <td>{assignment.title}</td>
-                    <td>{assignment.description}</td>
-                    <td
-                      style={{
-                        color: isPastDeadline ? "red" : "green",
-                      }}
-                    >
-                      {assignment.deadline}
-                    </td>
-                    <td className="flex items-center space-x-2 justify-center">
-                      {/* Submit Button */}
-                      <button
-                        disabled={isPastDeadline}
-                        className="btn btn-primary btn-sm bg-[#4CAF50] border-[#4CAF50] hover:bg-green-700 font-bold hover:border-green-700"
-                        onClick={() => handleOpenModal(assignment._id)}
+          <div className="overflow-x-auto">
+            <table className="table table-zebra w-full border border-[#4CAF50] ">
+              {/* Table Header */}
+              <thead className="bg-[#4CAF50] text-white">
+                <tr>
+                  <th className="text-left">#</th>
+                  <th className="text-left">Title</th>
+                  <th className="text-left">Description</th>
+                  <th className="text-left">Deadline</th>
+                  <th className="text-center">Submission</th>
+                </tr>
+              </thead>
+              {/* Table Body */}
+              <tbody className="border">
+                {assignments.map((assignment, index) => {
+                  const deadlineDate = format(
+                    parseISO(assignment.deadline),
+                    "yyyy-MM-dd"
+                  );
+                  const isPastDeadline = currentDate > deadlineDate;
+                  return (
+                    <tr key={assignment._id}>
+                      <th>{index + 1}</th>
+                      <td>{assignment.title}</td>
+                      <td>{assignment.description}</td>
+                      <td
+                        style={{
+                          color: isPastDeadline ? "red" : "green",
+                        }}
                       >
-                        Submit
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                        {assignment.deadline}
+                      </td>
+                      <td className="flex items-center space-x-2 justify-center">
+                        {/* Submit Button */}
+                        <button
+                          disabled={isPastDeadline}
+                          className="btn btn-primary btn-sm bg-[#4CAF50] border-[#4CAF50] hover:bg-green-700 font-bold hover:border-green-700"
+                          onClick={() => handleOpenModal(assignment._id)}
+                        >
+                          Submit
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
           <div className="pagination py-4">
             {/* Pagination Buttons */}
             <div

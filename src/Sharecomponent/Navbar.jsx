@@ -140,7 +140,8 @@ const Navbar = () => {
                   <div className="absolute w-4 h-4 rotate-45 bg-blue-400 -top-2 right-8 "></div>
                   <div className="text-sm p-2 text-center">
                     <p className="text-xl font-bold my-2">
-                      {user.displayName || "Anonymous User"}
+                      {user.displayName.split(" ").slice(0, 3).join(" ") ||
+                        "Anonymous User"}
                     </p>
                     <ul className="menu menu-vertical p-0">
                       <li className="!bg-[#4CAF50] border-[1px] border-solid border-white rounded-lg">
