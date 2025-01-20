@@ -24,11 +24,11 @@ const ProfileUpdateModal = ({ closeModal, refetch }) => {
     const { image, ...formData } = data;
     const photourl = await imageUpload(image[0]);
     formData.image = photourl;
-    await updateUserProfile(formData.name, formData.image);
     const res = await axiosSecure.patch(
       `/update-profile/${user?.email}`,
       formData
     );
+    await updateUserProfile(formData.name, formData.image);
     if (res.modifiedCount > 0) {
       toast.success("successfully update the Profile");
       setLoader(false);
