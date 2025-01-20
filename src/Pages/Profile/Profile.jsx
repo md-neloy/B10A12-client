@@ -1,19 +1,23 @@
 import Lottie from "lottie-react";
-import { FaEnvelope, FaUser } from "react-icons/fa";
+import { FaEnvelope, FaPhoneAlt, FaUser } from "react-icons/fa";
 import userAnimation from "./profile.json";
 import PreLoader from "../../components/PreLoader";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useContexHooks from "../../useHooks/useContexHooks";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
+import ProfileUpdateModal from "../../components/ProfileUpdateModal";
 
 const Profile = () => {
   const { user, logOut } = useContexHooks();
+  const [openModal, setOpenModal] = useState(false);
 
   const axiosSecure = useAxiosSecure();
   const {
     data: profile,
     isFetching,
+    refetch,
     error,
   } = useQuery({
     queryKey: ["classes"],
@@ -40,7 +44,14 @@ const Profile = () => {
     );
   }
 
-  const { name, role, email } = profile;
+  const { name, role, email, phone } = profile;
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   return (
     <div className="bg-gradient-to-r from-blue-100 via-white to-blue-100 p-6 h-full flex justify-center items-center">
@@ -89,12 +100,24 @@ const Profile = () => {
                   {email || "No Email Provided"}
                 </a>
               </div>
+              <div className="flex items-center gap-2">
+                <FaPhoneAlt className="text-blue-500 text-lg" />
+                <a
+                  href={`phone:${phone || ""}`}
+                  className="text-blue-600 hover:underline text-base"
+                >
+                  {phone || "No Number Provided"}
+                </a>
+              </div>
 
               {/* Interactive Buttons */}
               <div className="flex gap-4 mt-4">
-                {/* <button className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 hover:shadow-lg transition-all">
+                <button
+                  onClick={handleOpenModal}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 hover:shadow-lg transition-all"
+                >
                   Edit Profile
-                </button> */}
+                </button>
                 <button
                   onClick={logOut}
                   className="px-4 py-2 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 hover:shadow-lg transition-all"
@@ -106,6 +129,9 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      {openModal && (
+        <ProfileUpdateModal refetch={refetch} closeModal={handleCloseModal} />
+      )}
     </div>
   );
 };

@@ -88,9 +88,9 @@ const TeacherRq = () => {
   return (
     <div>
       <div className="overflow-x-auto">
-        <table className="table-auto w-full bg-white shadow-md rounded-lg border border-gray-200">
+        <table className="table-auto w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl border-2 border-green-600">
           {/* Table Header */}
-          <thead className="bg-gray-100">
+          <thead className="bg-[#4CAF50]">
             <tr>
               <th className="px-4 py-3 text-left text-gray-700">Name</th>
               <th className="px-4 py-3 text-left text-gray-700">Image</th>
@@ -168,69 +168,42 @@ const TeacherRq = () => {
           </tbody>
         </table>
       </div>
-      <div className="pagination">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "12px",
+      {/* Pagination */}
+      <div className="flex flex-wrap gap-2 justify-center py-3">
+        <button
+          className="btn btn-outline btn-sm"
+          onClick={() => {
+            if (currentPage > 1) handlePageChange(currentPage - 1);
           }}
         >
+          Prev
+        </button>
+        {pages.map((page) => (
           <button
-            className="btn btn-square"
-            onClick={() => {
-              if (currentPage > 1) {
-                handlePageChange(currentPage - 1);
-              }
-            }}
+            key={page}
+            className={`btn btn-sm ${
+              currentPage === page + 1
+                ? "bg-[#4CAF50] hover:bg-[#388E3C] text-white"
+                : "btn-outline"
+            }`}
+            onClick={() => handlePageChange(page + 1)}
           >
-            Prev
+            {page + 1}
           </button>
-          {pages.map((page) => (
-            <button
-              key={page}
-              className={
-                currentPage === page + 1
-                  ? `bg-[#4CAF50] hover:bg-[#388E3C] text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center`
-                  : "btn btn-outline"
-              }
-              onClick={() => {
-                handlePageChange(page + 1);
-              }}
-            >
-              {page + 1}
-            </button>
-          ))}
-          <button
-            className="btn btn-square"
-            onClick={() => {
-              if (currentPage < numberOfPages) {
-                handlePageChange(currentPage + 1);
-              }
-            }}
-          >
-            Next
-          </button>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "12px",
-            }}
-          >
-            <select
-              value={itemsPerPage}
-              onChange={handleItemsPerPageChange}
-              name="itemsPerPage"
-            >
-              <option value="6">5</option>
-              <option value="10">9</option>
-              <option value="20">21</option>
-            </select>
-          </div>
-        </div>
+        ))}
+        <button
+          className="btn btn-outline btn-sm"
+          onClick={() => {
+            if (currentPage < numberOfPages) handlePageChange(currentPage + 1);
+          }}
+        >
+          Next
+        </button>
+        <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
       </div>
     </div>
   );

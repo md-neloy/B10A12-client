@@ -4,10 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { toast } from "react-toastify";
 
-const AdminUsersTable = () => {
+const Allusers = () => {
   const [searchOn, setSearchOn] = useState("");
   const axiosSecure = useAxiosSecure();
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: useCounts } = useQuery({
     queryKey: ["useCounts"],
@@ -81,16 +81,19 @@ const AdminUsersTable = () => {
           placeholder="Search by name or email"
           className="input input-bordered w-full max-w-sm"
         />
-        <button onClick={onSearch} className="btn btn-primary ml-2">
+        <button
+          onClick={onSearch}
+          className="bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-4 py-2 rounded-lg text-lg font-medium transition-all text-center"
+        >
           Search
         </button>
       </div>
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="table-auto w-full bg-white shadow-md rounded-lg border border-gray-200">
+        <table className="table-auto w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl rounded-lg border border-green-600">
           {/* Table Header */}
-          <thead className="bg-gray-100">
+          <thead className="bg-[#4CAF50]">
             <tr>
               <th className="px-4 py-3 text-left text-gray-700">User Name</th>
               <th className="px-4 py-3 text-left text-gray-700">User Email</th>
@@ -139,73 +142,45 @@ const AdminUsersTable = () => {
           </tbody>
         </table>
       </div>
-      <div className="pagination">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "12px",
+      {/* Pagination */}
+      <div className="flex flex-wrap gap-2 justify-center py-3">
+        <button
+          className="btn btn-outline btn-sm"
+          onClick={() => {
+            if (currentPage > 1) handlePageChange(currentPage - 1);
           }}
         >
+          Prev
+        </button>
+        {pages.map((page) => (
           <button
-            className="btn btn-square"
-            onClick={() => {
-              if (currentPage > 1) {
-                handlePageChange(currentPage - 1);
-              }
-            }}
+            key={page}
+            className={`btn btn-sm ${
+              currentPage === page + 1
+                ? "bg-[#4CAF50] hover:bg-[#388E3C] text-white"
+                : "btn-outline"
+            }`}
+            onClick={() => handlePageChange(page + 1)}
           >
-            Prev
+            {page + 1}
           </button>
-          {pages.map((page) => (
-            <button
-              key={page}
-              className={
-                currentPage === page + 1
-                  ? `bg-[#4CAF50] hover:bg-[#388E3C] text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center`
-                  : "btn btn-outline"
-              }
-              onClick={() => {
-                handlePageChange(page + 1);
-              }}
-            >
-              {page + 1}
-            </button>
-          ))}
-          <button
-            className="btn btn-square"
-            onClick={() => {
-              if (currentPage < numberOfPages) {
-                handlePageChange(currentPage + 1);
-              }
-            }}
-          >
-            Next
-          </button>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "12px",
-            }}
-          >
-            <select
-              value={itemsPerPage}
-              onChange={handleItemsPerPageChange}
-              name="itemsPerPage"
-            >
-              <option value="3">3</option>
-              <option value="6">6</option>
-              <option value="10">9</option>
-              <option value="20">21</option>
-            </select>
-          </div>
-        </div>
+        ))}
+        <button
+          className="btn btn-outline btn-sm"
+          onClick={() => {
+            if (currentPage < numberOfPages) handlePageChange(currentPage + 1);
+          }}
+        >
+          Next
+        </button>
+        <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
       </div>
     </div>
   );
 };
 
-export default AdminUsersTable;
+export default Allusers;

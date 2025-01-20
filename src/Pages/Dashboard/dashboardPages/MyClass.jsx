@@ -40,7 +40,7 @@ const MyClass = () => {
   const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1;
   const pages = [...Array(numberOfPages).keys()];
 
-  console.log(classes);
+  // console.log(classes);
 
   if (isFetching) {
     return <PreLoader />;
@@ -66,7 +66,7 @@ const MyClass = () => {
   };
   return (
     <div>
-      <div className="p-5 ">
+      <div className="p-5 bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl">
         <SectionHeader title={"My Classes"} />
         {classes?.length === 0 ? (
           <p className="text-red-600 text-xl text-center mt-4">

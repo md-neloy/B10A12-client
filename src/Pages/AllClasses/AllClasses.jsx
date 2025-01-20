@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet-async";
 const AllClasses = () => {
   const axiosPublic = useAxiosPublic();
 
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
   // Fetch total count of classes
@@ -26,9 +26,9 @@ const AllClasses = () => {
       return res.data;
     },
   });
-  const numOfData = counts?.allClasses || 0;
-  const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1;
-  const pages = [...Array(numberOfPages).keys()];
+  const numOfData = counts?.allClasses || 0; // allclasses.length = 100
+  const numberOfPages = Math.ceil(numOfData / itemsPerPage) || 1; // 100/10 = 10
+  const pages = [...Array(numberOfPages).keys()]; //[1,2,3,4,5,6...]
 
   // Fetch paginated class data
   const {
@@ -85,67 +85,43 @@ const AllClasses = () => {
               <AllClassesCard key={classes._id} item={classes} />
             ))}
           </div>
-          <div className="pagination py-4">
-            {/* Pagination Buttons */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "12px",
+          {/* Pagination */}
+          <div className="flex flex-wrap gap-2 justify-center py-3">
+            <button
+              className="btn btn-outline btn-sm"
+              onClick={() => {
+                if (currentPage > 1) handlePageChange(currentPage - 1);
               }}
             >
+              Prev
+            </button>
+            {pages.map((page) => (
               <button
-                className="btn btn-square"
-                onClick={() => {
-                  if (currentPage > 1) handlePageChange(currentPage - 1);
-                }}
+                key={page}
+                className={`btn btn-sm ${
+                  currentPage === page + 1
+                    ? "bg-[#4CAF50] hover:bg-[#388E3C] text-white"
+                    : "btn-outline"
+                }`}
+                onClick={() => handlePageChange(page + 1)}
               >
-                Prev
+                {page + 1}
               </button>
-              {pages.map((page) => (
-                <button
-                  key={page}
-                  className={
-                    currentPage === page + 1
-                      ? `bg-[#4CAF50] hover:bg-[#388E3C] text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center`
-                      : "btn btn-outline"
-                  }
-                  onClick={() => handlePageChange(page + 1)}
-                >
-                  {page + 1}
-                </button>
-              ))}
-              <button
-                className="btn btn-square"
-                onClick={() => {
-                  if (currentPage < numberOfPages)
-                    handlePageChange(currentPage + 1);
-                }}
-              >
-                Next
-              </button>
-              {/* Items Per Page Dropdown */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "12px",
-                }}
-              >
-                <select
-                  value={itemsPerPage}
-                  onChange={handleItemsPerPageChange}
-                  name="itemsPerPage"
-                >
-                  <option value="3">3</option>
-                  <option value="6">6</option>
-                  <option value="10">9</option>
-                  <option value="20">21</option>
-                </select>
-              </div>
-            </div>
+            ))}
+            <button
+              className="btn btn-outline btn-sm"
+              onClick={() => {
+                if (currentPage < numberOfPages)
+                  handlePageChange(currentPage + 1);
+              }}
+            >
+              Next
+            </button>
+            <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
           </div>
         </div>
       </Container>

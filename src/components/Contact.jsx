@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import emailjs from "@emailjs/browser";
 import {
@@ -12,17 +12,24 @@ import {
 } from "react-icons/fa";
 import SectionHeader from "./SectionHeader";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+
 const Contact = () => {
   const [sentEmail, setSentEmail] = useState(false);
-  const formRef = useRef();
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data, e) => {
     setSentEmail(true);
     emailjs
       .sendForm(
         import.meta.env.VITE_email_service_id,
         import.meta.env.VITE_email_Tamplates_id,
-        formRef.current,
+        e.target,
         {
           publicKey: import.meta.env.VITE_email_public_key,
         }
@@ -33,7 +40,7 @@ const Contact = () => {
           if (res.status === 200) {
             setSentEmail(false);
             toast.success("Your Subscription Is Complete");
-            e.target.reset();
+            reset();
           }
         },
         (error) => {
@@ -42,6 +49,7 @@ const Contact = () => {
         }
       );
   };
+
   return (
     <div>
       <Helmet>
@@ -99,7 +107,7 @@ const Contact = () => {
             <h3 className="text-2xl font-semibold mb-6">
               Mail Us Your Message
             </h3>
-            <form ref={formRef} onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control mb-4">
                 <label className="label">
                   <span className="label-text">Your Name</span>
@@ -109,8 +117,11 @@ const Contact = () => {
                   name="to_name"
                   placeholder="Enter your name"
                   className="input input-bordered w-full"
-                  required
+                  {...register("to_name", { required: "Name is required" })}
                 />
+                {errors.to_name && (
+                  <p className="text-red-500">{errors.to_name.message}</p>
+                )}
               </div>
               <div className="form-control mb-4">
                 <label className="label">
@@ -121,8 +132,11 @@ const Contact = () => {
                   name="from_email"
                   placeholder="Enter your email"
                   className="input input-bordered w-full"
-                  required
+                  {...register("from_email", { required: "Email is required" })}
                 />
+                {errors.from_email && (
+                  <p className="text-red-500">{errors.from_email.message}</p>
+                )}
               </div>
               <div className="form-control mb-4">
                 <label className="label">
@@ -132,7 +146,11 @@ const Contact = () => {
                   name="message"
                   placeholder="Enter your message"
                   className="textarea textarea-bordered w-full"
+                  {...register("message", { required: "Message is required" })}
                 ></textarea>
+                {errors.message && (
+                  <p className="text-red-500">{errors.message.message}</p>
+                )}
               </div>
               <button
                 type="submit"

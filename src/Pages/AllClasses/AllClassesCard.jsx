@@ -5,7 +5,7 @@ const AllClassesCard = ({ item }) => {
   return (
     <div>
       <div
-        className="card card-compact bg-[#E9ECEF] w-full h-full shadow-xl relative"
+        className="card card-compact bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl w-full h-full  relative"
         data-aos="zoom-in"
       >
         <span className="absolute top-2 right-4 text-white font-bold text-xl bg-[#388E3C] rounded-md p-2">
@@ -38,7 +38,9 @@ const AllClassesCard = ({ item }) => {
             </div>
             {/* Description */}
             <div className="flex">
-              <h2 className="flex-1">{item.description}</h2>
+              <h2 className="flex-1">
+                {item.description.split(" ").slice(0, 20).join(" ")}...
+              </h2>
             </div>
             {/* Card Actions */}
             <div className="card-actions mt-auto p-3 ">

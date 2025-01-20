@@ -64,7 +64,7 @@ const AddClass = () => {
   };
 
   return (
-    <div className="bg-base-200  flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl  flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <Helmet>
         <title>SmartLearning | Add Class</title>
       </Helmet>
@@ -74,7 +74,7 @@ const AddClass = () => {
             <Lottie animationData={teacherAnimation} />
           </div>
         </div>
-        <div className="card bg-base-100 w-full lg:flex-1 shadow-2xl p-2 md:p-6 rounded-lg">
+        <div className="card bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl w-full lg:flex-1 p-2 md:p-6 rounded-lg">
           <form
             className="card-body p-2 md:p-4 m-0 md:space-y-4"
             onSubmit={handleSubmit(onSubmit)}
@@ -189,7 +189,10 @@ const AddClass = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary w-full">
+              <button
+                type="submit"
+                className="bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center"
+              >
                 Add Class
               </button>
             </div>

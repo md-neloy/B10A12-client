@@ -80,7 +80,9 @@ const TeacherAddClassCard = ({ item, refetch }) => {
             <span className="font-semibold">Price:</span> ${price}
           </p>
 
-          <p className="text-sm text-gray-600 mt-3">{description}</p>
+          <p className="text-sm text-gray-600 mt-3">
+            {description.split(" ").slice(0, 20).join(" ")}...
+          </p>
 
           {/* Buttons Section */}
           <div className="mt-6 flex flex-wrap gap-3">
