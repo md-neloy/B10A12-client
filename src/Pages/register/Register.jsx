@@ -72,7 +72,7 @@ const Register = () => {
           setUser(result.user);
           const userInfo = {
             name: name,
-            email: email,
+            email: email.toLowerCase(),
             image: imgUrl,
             role: "student",
           };
@@ -98,7 +98,7 @@ const Register = () => {
         const user = result.user;
         const userInfo = {
           name: user.displayName,
-          email: user.email,
+          email: user.email.toLowerCase(),
           image: user.photoURL,
           role: "student",
         };
