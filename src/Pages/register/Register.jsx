@@ -37,6 +37,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -79,7 +80,7 @@ const Register = () => {
           updateUserProfile(name, imgUrl).then(() => {
             successNofity();
             navigate("/");
-
+            reset();
             setUser((prev) => ({
               ...prev,
               displayName: name,
@@ -117,7 +118,7 @@ const Register = () => {
   return (
     <div className="bg-base-200 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <Helmet>
-        <title>Marathon-GuidLine | Register</title>
+        <title>SmartLearning | Register</title>
       </Helmet>
       <div className="flex flex-col lg:flex-row-reverse items-center w-full max-w-4xl">
         <div className="w-full lg:w-1/2 flex justify-center">

@@ -50,6 +50,7 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -59,6 +60,7 @@ const SignIn = () => {
       .then((result) => {
         if (result.user) {
           successNofity();
+          reset();
           if (location.state) {
             navigate(location.state);
           } else {
@@ -97,7 +99,7 @@ const SignIn = () => {
   return (
     <div className="bg-base-200 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <Helmet>
-        <title>Marathon-GuidLine | SignIn</title>
+        <title>SmartLearning | SignIn</title>
       </Helmet>
       <div className="flex flex-col lg:flex-row-reverse items-center w-full max-w-4xl">
         <div className="w-full lg:w-1/2 flex justify-center">
