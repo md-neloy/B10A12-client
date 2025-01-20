@@ -2,10 +2,17 @@ import { Link, NavLink } from "react-router-dom";
 import Container from "./Container";
 import logo3 from "../assets/3.png";
 import useContexHooks from "../useHooks/useContexHooks";
-import { FaUserAlt } from "react-icons/fa";
+import { FaBars, FaEnvelope, FaTimes, FaUserAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Function to toggle menu state
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
@@ -22,7 +29,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
-              : "text-white hover:text-yellow-400 font-bold"
+              : "text-black md:text-white hover:text-yellow-400 font-bold"
           }
         >
           Home
@@ -34,7 +41,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
-              : "text-white hover:text-yellow-400 font-bold"
+              : "text-black md:text-white hover:text-yellow-400 font-bold"
           }
         >
           All Classes
@@ -46,10 +53,22 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
-              : "text-white hover:text-yellow-400 font-bold"
+              : "text-black md:text-white hover:text-yellow-400 font-bold"
           }
         >
           Teach on SmartLearning
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to={"/order/email"}
+          className={({ isActive }) =>
+            isActive
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              : "text-black md:text-white hover:text-yellow-400 font-bold"
+          }
+        >
+          <FaEnvelope /> Contact
         </NavLink>
       </li>
     </>
@@ -67,38 +86,31 @@ const Navbar = () => {
       } bg-[#212529] h-fit transition-all`}
     >
       <Container>
-        <div className="navbar  text-white ">
-          <div className="navbar-start">
+        <div className="navbar  text-white justify-between ">
+          <div className="navbar-start w-fit  md:w-1/2">
             <div className="dropdown">
-              <div
+              <label
                 tabIndex={0}
-                role="button"
                 className="btn btn-ghost lg:hidden"
+                onClick={toggleMenu}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                {isMenuOpen ? (
+                  <FaTimes className="h-5 w-5" />
+                ) : (
+                  <FaBars className="h-5 w-5" />
+                )}
+              </label>
+              {isMenuOpen && (
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 gap-3 shadow text-black z-10"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 gap-3 shadow"
-              >
-                {list}
-              </ul>
+                  {list} {/* Your menu items */}
+                </ul>
+              )}
             </div>
-            <Link to="/" className="btn btn-ghost text-xl">
-              <div className="w-10">
+            <Link to="/" className="btn btn-ghost text-xl p-0">
+              <div className="md:w-10 hidden md:block">
                 <img src={logo3} alt="logo" />
               </div>
               SmartLearning
@@ -107,12 +119,12 @@ const Navbar = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 gap-3">{list}</ul>
           </div>
-          <div className="navbar-end  gap-2 md:gap-4">
+          <div className="navbar-end w-fit md:w-1/2  gap-3 md:gap-4">
             {user ? (
               <div className="relative group">
                 {/* User Profile Photo */}
                 <div
-                  className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden cursor-pointer "
+                  className="w-7 h-7 md:w-10 md:h-10 bg-gray-300 rounded-full overflow-hidden cursor-pointer "
                   data-tooltip-id="user-tooltip"
                   data-tooltip-content={user.displayName || "User"}
                 >
@@ -166,7 +178,7 @@ const Navbar = () => {
               </>
             )}
             <div>
-              <label className="swap swap-rotate w-fit">
+              <label className="swap swap-rotate w-7 md:w-fit">
                 {/* this hidden checkbox controls the state */}
                 <input type="checkbox" onChange={handleChange} />
 

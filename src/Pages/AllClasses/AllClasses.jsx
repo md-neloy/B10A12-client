@@ -5,6 +5,7 @@ import PreLoader from "../../components/PreLoader";
 import { useState } from "react";
 import AllClassesCard from "./AllClassesCard";
 import SectionHeader from "../../components/SectionHeader";
+import { Helmet } from "react-helmet-async";
 
 const AllClasses = () => {
   const axiosPublic = useAxiosPublic();
@@ -73,6 +74,9 @@ const AllClasses = () => {
 
   return (
     <section className="py-10">
+      <Helmet>
+        <title>SmartLearning | All Classes</title>
+      </Helmet>
       <Container>
         <div>
           <SectionHeader title={"All Classes"} />

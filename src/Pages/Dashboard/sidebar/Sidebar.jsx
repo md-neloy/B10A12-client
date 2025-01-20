@@ -1,4 +1,4 @@
-import { FaEnvelope, FaHome, FaUser } from "react-icons/fa";
+import { FaHome, FaUser } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import useAdmin from "../../../privateRouts/useAdmin";
 import AdminMenu from "../menus/AdminMenu";
@@ -32,11 +32,6 @@ const Sidebar = () => {
           <li>
             <NavLink to={"/dashboard/profile"}>
               <FaUser /> Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/order/email"}>
-              <FaEnvelope /> Contact
             </NavLink>
           </li>
         </ul>

@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import PreLoader from "../../../components/PreLoader";
 import useContexHooks from "../../../useHooks/useContexHooks";
 import SectionHeader from "../../../components/SectionHeader";
+import { Helmet } from "react-helmet-async";
 
 const StudentEnrollClass = () => {
   const axiosSecure = useAxiosSecure();
@@ -43,6 +44,9 @@ const StudentEnrollClass = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>SmartLearning | Enroll Classes</title>
+      </Helmet>
       <div className="p-5 relative">
         <SectionHeader title={"Your Enroll Classes"} />
         {classes?.length === 0 ? (

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "./Banner";
 import Community from "./Community";
 import Partners from "./Partners";
@@ -9,6 +10,9 @@ import TopEnroll from "./TopEnroll";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>SmartLearning | Home</title>
+      </Helmet>
       <Banner />
       <Partners />
       <TopEnroll />

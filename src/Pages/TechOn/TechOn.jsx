@@ -106,7 +106,7 @@ const TeachOn = () => {
   return (
     <div className="bg-base-200 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <Helmet>
-        <title>Apply for Teaching | Education Platform</title>
+        <title>SmartLearning | Teach on</title>
       </Helmet>
       <div className="flex flex-col lg:flex-row-reverse items-center w-full max-w-5xl">
         <div className="w-full lg:w-1/2 flex justify-center">

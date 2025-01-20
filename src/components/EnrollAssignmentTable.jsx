@@ -8,6 +8,7 @@ import { format, parseISO } from "date-fns";
 import SectionHeader from "./SectionHeader";
 import FeedbackModal from "./FeedbackModal";
 import PreLoader from "./PreLoader";
+import { Helmet } from "react-helmet-async";
 
 const EnrollAssignmentTable = () => {
   const { id } = useParams(); //classid
@@ -76,6 +77,9 @@ const EnrollAssignmentTable = () => {
 
   return (
     <div className="overflow-x-auto p-5">
+      <Helmet>
+        <title>SmartLearning | Class Assignment</title>
+      </Helmet>
       <SectionHeader title={"Class Assignment"} />
       <button
         onClick={feedbackModal}

@@ -5,6 +5,7 @@ import PreLoader from "../../components/PreLoader";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useContexHooks from "../../useHooks/useContexHooks";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const { user, logOut } = useContexHooks();
@@ -43,6 +44,9 @@ const Profile = () => {
 
   return (
     <div className="bg-gradient-to-r from-blue-100 via-white to-blue-100 p-6 h-full flex justify-center items-center">
+      <Helmet>
+        <title>SmartLearning | Profile</title>
+      </Helmet>
       <div className="flex flex-col md:flex-row items-center justify-center gap-8 w-full max-w-4xl shadow-2xl rounded-xl overflow-hidden bg-white">
         {/* Animation */}
         <div className="w-full md:w-1/2 bg-gradient-to-t from-blue-200 via-blue-50 to-blue-100 p-6">
