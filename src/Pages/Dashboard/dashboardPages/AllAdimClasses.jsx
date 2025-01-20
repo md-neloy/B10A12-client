@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AllAdminClasses = () => {
   const axiosSecure = useAxiosSecure();
@@ -85,6 +86,9 @@ const AllAdminClasses = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>SmartLearning | All Classes</title>
+      </Helmet>
       {/* Table */}
       <div className="overflow-x-auto max-w-full">
         <table className="table-auto w-full border-collapse bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl border-2 border-green-600">

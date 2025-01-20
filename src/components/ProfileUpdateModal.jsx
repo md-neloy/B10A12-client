@@ -29,8 +29,7 @@ const ProfileUpdateModal = ({ closeModal, refetch }) => {
       `/update-profile/${user?.email}`,
       formData
     );
-    if (res) {
-      console.log(res);
+    if (res.modifiedCount > 0) {
       toast.success("successfully update the Profile");
       setLoader(false);
       refetch();

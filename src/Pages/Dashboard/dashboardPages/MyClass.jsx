@@ -5,6 +5,7 @@ import useContexHooks from "../../../useHooks/useContexHooks";
 import PreLoader from "../../../components/PreLoader";
 import TeacherAddClassCard from "../../../components/TeacherAddClassCard";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const MyClass = () => {
   const axiosSecure = useAxiosSecure();
@@ -66,6 +67,9 @@ const MyClass = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>SmartLearning | My Classes</title>
+      </Helmet>
       <div className="p-5 bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl">
         <SectionHeader title={"My Classes"} />
         {classes?.length === 0 ? (

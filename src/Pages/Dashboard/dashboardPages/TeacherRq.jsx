@@ -3,6 +3,7 @@ import PreLoader from "../../../components/PreLoader";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const TeacherRq = () => {
   const axiosSecure = useAxiosSecure();
@@ -87,6 +88,9 @@ const TeacherRq = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>SmartLearning | Teacher Rq</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table-auto w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl border-2 border-green-600">
           {/* Table Header */}

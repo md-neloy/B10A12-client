@@ -3,6 +3,7 @@ import PreLoader from "../../../components/PreLoader";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const Allusers = () => {
   const [searchOn, setSearchOn] = useState("");
@@ -73,6 +74,9 @@ const Allusers = () => {
   };
   return (
     <div className="w-full px-4 py-6">
+      <Helmet>
+        <title>SmartLearning | All Users</title>
+      </Helmet>
       {/* Search Input */}
       <div className="flex justify-start mb-4">
         <input
