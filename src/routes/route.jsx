@@ -22,6 +22,7 @@ import StudentEnrollClass from "../Pages/Dashboard/dashboardPages/StudentEnrollC
 import SeeProgressByAdmin from "../Pages/Dashboard/dashboardPages/SeeProgressByAdmin";
 import TeacherSeeDetails from "../Pages/Dashboard/dashboardPages/TeacherSeeDetails";
 import EnrollAssignmentTable from "../components/EnrollAssignmentTable";
+import Contact from "../components/Contact";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/allclasses",
         element: <AllClasses />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/techon",
