@@ -1,7 +1,7 @@
 # SmartLearning Website
 
 SmartLearning is an innovative platform designed to enhance learning experiences through interactive courses, personalized study materials, and a collaborative community of learners and educators.
-[SmartLearning Screenshot](https://i.ibb.co/Mks8KbXd/Screenshot-82.png)
+![SmartLearning Screenshot](https://i.ibb.co/Mks8KbXd/Screenshot-82.png)
 ## Admin Credentials
 
 - **Username**: neloy@gmail.com
