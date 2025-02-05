@@ -128,9 +128,6 @@ Ensure you have the following installed:
 ## Contribution
 We welcome contributions! If you find any issues or want to enhance the platform, feel free to submit a pull request.
 
-## License
-This project is licensed under the **MIT License**.
-
 ## Contact
-For any queries, reach out to the project maintainers at: [your-email@example.com]
+For any queries, reach out to the project maintainers at: [mhneloy708@gmail.com]
 
