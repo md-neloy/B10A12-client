@@ -101,6 +101,7 @@ const Navbar = () => {
   const { user, logOut, togol, setTogol } = useContexHooks();
   const handleChange = () => {
     setTogol(!togol);
+    // localStorage.setItem("darkMode", !togol);
   };
   console.log(togol);
   return (

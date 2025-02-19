@@ -10,6 +10,8 @@ import {
 } from "react-icons/fa";
 import Container from "../../Sharecomponent/Container";
 import Marquee from "react-fast-marquee";
+import useContexHooks from "../../useHooks/useContexHooks";
+import SectionHeader from "../../components/SectionHeader";
 
 const categories = [
   { icon: <FaCode />, name: "Web Development" },
@@ -23,13 +25,12 @@ const categories = [
 ];
 
 const Category = () => {
+  const { togol } = useContexHooks();
   return (
-    <section className="bg-gray-50 py-10">
+    <section className={`${togol && "bg-gray-50"} py-10`}>
       <Container>
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 text-gray-800">
-            Explore Categories
-          </h2>
+          <SectionHeader title={"Explore Categories"} />
           <div className="w-full">
             <Marquee>
               <div className="grid grid-cols-4 gap-4">

@@ -13,9 +13,11 @@ import {
 import SectionHeader from "./SectionHeader";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import useContexHooks from "../useHooks/useContexHooks";
 
 const Contact = () => {
   const [sentEmail, setSentEmail] = useState(false);
+  const { togol } = useContexHooks();
   const {
     register,
     handleSubmit,
@@ -60,24 +62,34 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Contact Details */}
           <div className="flex flex-col gap-6">
-            <h3 className="text-2xl font-semibold">Get in Touch</h3>
-            <p className="text-gray-600">
+            <h3
+              className={`text-2xl font-semibold ${
+                togol ? "text-gray-700" : "text-white"
+              }`}
+            >
+              Get in Touch
+            </h3>
+            <p className={`${togol ? "text-gray-600" : "text-white"}`}>
               Feel free to reach out to us for any inquiries, feedback, or
               assistance.
             </p>
             <div className="flex items-center gap-4">
               <FaMapMarkerAlt className="text-[#4CAF50] text-2xl" />
-              <p className="text-gray-700">
+              <p className={`${togol ? "text-gray-700" : "text-white"}`}>
                 123 Main Street, Dhaka, Bangladesh
               </p>
             </div>
             <div className="flex items-center gap-4">
               <FaPhoneAlt className="text-[#4CAF50]  text-2xl" />
-              <p className="text-gray-700">+880 123 456 7890</p>
+              <p className={`${togol ? "text-gray-700" : "text-white"}`}>
+                +880 123 456 7890
+              </p>
             </div>
             <div className="flex items-center gap-4">
               <FaEnvelope className="text-[#4CAF50]  text-2xl" />
-              <p className="text-gray-700">mhneloy708@gmail.com</p>
+              <p className={`${togol ? "text-gray-700" : "text-white"}`}>
+                mhneloy708@gmail.com
+              </p>
             </div>
             {/* Social Icons */}
             <div className="flex gap-4 mt-4">
