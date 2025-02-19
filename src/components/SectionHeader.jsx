@@ -1,9 +1,17 @@
 import PropTypes from "prop-types";
+import useContexHooks from "../useHooks/useContexHooks";
 
 const SectionHeader = ({ title }) => {
+  const { togol } = useContexHooks();
   return (
     <div>
-      <h2 className="text-3xl font-bold text-center mb-8">{title}</h2>
+      <h2
+        className={`text-3xl font-bold text-center mb-8 ${
+          !togol && "text-white"
+        }`}
+      >
+        {title}
+      </h2>
     </div>
   );
 };
