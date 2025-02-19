@@ -74,6 +74,18 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
+          to="/aboutUs"
+          className={({ isActive }) =>
+            isActive
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              : "text-black md:text-white hover:text-yellow-400 font-bold"
+          }
+        >
+          About SmartLearning
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to={"/contact"}
           className={({ isActive }) =>
             isActive

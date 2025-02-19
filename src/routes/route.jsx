@@ -23,6 +23,7 @@ import SeeProgressByAdmin from "../Pages/Dashboard/dashboardPages/SeeProgressByA
 import TeacherSeeDetails from "../Pages/Dashboard/dashboardPages/TeacherSeeDetails";
 import EnrollAssignmentTable from "../components/EnrollAssignmentTable";
 import Contact from "../components/Contact";
+import AboutUs from "../components/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/aboutUs",
+        element: <AboutUs />,
       },
       {
         path: "/techon",
