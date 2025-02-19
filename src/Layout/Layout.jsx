@@ -9,7 +9,7 @@ const Layout = () => {
   AOS.init();
   const { togol } = useContexHooks();
   return (
-    <div className={`bg-${togol ? "transparent" : "[#111827]"}`}>
+    <div className={`${togol ? "bg-transparent" : "bg-[#111827]"}`}>
       <Navbar />
       <div className="min-h-[calc(100vh-360px)]">
         <Outlet />
