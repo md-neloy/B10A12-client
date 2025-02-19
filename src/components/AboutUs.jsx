@@ -1,10 +1,12 @@
 import Marquee from "react-fast-marquee";
 import { FaBookReader, FaChalkboardTeacher } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useContexHooks from "../useHooks/useContexHooks";
 
 const AboutUs = () => {
+  const { togol } = useContexHooks();
   return (
-    <div className="bg-base-200 py-12 px-6 md:px-12 lg:px-24">
+    <div className=" py-12 px-6 md:px-12 lg:px-24">
       <div className="flex flex-col items-center gap-10">
         {/* Marquee Section */}
         <div className="w-full md:w-1/2">
@@ -23,7 +25,13 @@ const AboutUs = () => {
 
         {/* Text Content */}
         <div className="w-full md:w-1/2 space-y-6">
-          <h2 className="text-4xl font-bold text-black">About SmartLearning</h2>
+          <h2
+            className={`text-4xl font-bold  ${
+              togol ? "text-black" : "text-white"
+            }`}
+          >
+            About SmartLearning
+          </h2>
           <p className="text-lg text-gray-600">
             SmartLearning is a revolutionary platform dedicated to enhancing
             education through interactive and engaging learning experiences. We
