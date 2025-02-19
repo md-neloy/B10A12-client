@@ -66,17 +66,17 @@ const Contact = () => {
               assistance.
             </p>
             <div className="flex items-center gap-4">
-              <FaMapMarkerAlt className="text-[#57A9AE] text-2xl" />
+              <FaMapMarkerAlt className="text-[#4CAF50] text-2xl" />
               <p className="text-gray-700">
                 123 Main Street, Dhaka, Bangladesh
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <FaPhoneAlt className="text-[#57A9AE]  text-2xl" />
+              <FaPhoneAlt className="text-[#4CAF50]  text-2xl" />
               <p className="text-gray-700">+880 123 456 7890</p>
             </div>
             <div className="flex items-center gap-4">
-              <FaEnvelope className="text-[#57A9AE]  text-2xl" />
+              <FaEnvelope className="text-[#4CAF50]  text-2xl" />
               <p className="text-gray-700">mhneloy708@gmail.com</p>
             </div>
             {/* Social Icons */}

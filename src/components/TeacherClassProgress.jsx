@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaUserGraduate, FaClipboardList, FaFileUpload } from "react-icons/fa";
 import { MdLibraryAdd, MdVideoCameraFront } from "react-icons/md";
 import TeacherCreateAsignModal from "./TeacherCreateAsignModal";
+import { Helmet } from "react-helmet-async";
 
 const TeacherClassProgress = ({ classData }) => {
   const [openModal, setOpenModal] = useState(null);
@@ -15,6 +16,9 @@ const TeacherClassProgress = ({ classData }) => {
   };
   return (
     <div>
+      <Helmet>
+        <title>SmartLearning | Class Progress</title>
+      </Helmet>
       <h2 className="text-2xl font-bold text-center ">Class Progress</h2>
       <div className="flex justify-between items-center">
         <button

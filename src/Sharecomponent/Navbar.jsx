@@ -5,7 +5,7 @@ import useContexHooks from "../useHooks/useContexHooks";
 import { FaBars, FaEnvelope, FaTimes, FaUserAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 const Navbar = () => {
-  const [scrollPosition, setScrollPosition] = useState(null);
+  // const [scrollPosition, setScrollPosition] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Function to toggle menu state
@@ -13,13 +13,26 @@ const Navbar = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  const [isSticky, setIsSticky] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY);
+      if (window.scrollY > 50) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
-  }, [scrollPosition]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrollPosition(window.scrollY);
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+  // }, [scrollPosition]);
   const list = (
     <>
       <li>
@@ -79,11 +92,12 @@ const Navbar = () => {
   // };
   return (
     <div
-      className={`${
-        scrollPosition > 100
-          ? "sticky top-0 z-10 opacity-90 "
-          : "static opacity-100"
-      } bg-[#212529] h-fit transition-all`}
+      className={`sticky top-0 left-0 w-full z-10 transition-all duration-300${
+        isSticky ? "opacity-90 " : "static opacity-100"
+      } bg-[#212529] h-fit transition-all duration-300`}
+      // className={`sticky top-0 left-0 w-full z-50 opacity-90 transition-all duration-300 ${
+      //   isSticky ? "bg-[#212529] shadow-lg py-2" : "bg-[#212529] py-4"
+      // }`}
     >
       <Container>
         <div className="navbar  text-white justify-between ">

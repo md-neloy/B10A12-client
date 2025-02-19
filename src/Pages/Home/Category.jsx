@@ -9,15 +9,7 @@ import {
   FaEllipsisH,
 } from "react-icons/fa";
 import Container from "../../Sharecomponent/Container";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/grid";
-import "swiper/css/pagination";
-
-// import required modules
-import { Grid, Pagination } from "swiper/modules";
+import Marquee from "react-fast-marquee";
 
 const categories = [
   { icon: <FaCode />, name: "Web Development" },
@@ -39,23 +31,13 @@ const Category = () => {
             Explore Categories
           </h2>
           <div className="w-full">
-            <Swiper
-              slidesPerView={2}
-              grid={{
-                cols: 4,
-                rows: 2,
-                fill: "row",
-              }}
-              spaceBetween={30}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Grid, Pagination]}
-              className="mySwiper"
-            >
-              {categories.map((category, index) => (
-                <SwiperSlide key={index}>
-                  <div className="flex flex-col items-center p-6 bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Marquee>
+              <div className="grid grid-cols-4 gap-4">
+                {categories.map((category, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center p-6 bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  >
                     <div className="text-4xl text-[#212529] mb-4">
                       {category.icon}
                     </div>
@@ -63,9 +45,9 @@ const Category = () => {
                       {category.name}
                     </h3>
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                ))}
+              </div>
+            </Marquee>
           </div>
         </div>
       </Container>
