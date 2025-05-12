@@ -19,7 +19,9 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [enrollPrice, setEnrollPrice] = useState(0);
   // dark theme togol
-  const [togol, setTogol] = useState(true);
+  const [togol, setTogol] = useState(
+    localStorage.getItem("smartLearningTheme") === "true"
+  );
 
   const axiosPublic = useAxiosPublic();
 

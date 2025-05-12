@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import useAxiosSecure from "../../../useHooks/useAxiosSecure";
 import PreLoader from "../../../components/PreLoader";
+import SectionHeader from "../../../components/SectionHeader";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 
@@ -44,36 +45,41 @@ const GraphCart = () => {
     return <PreLoader />;
   }
   return (
-    <div className="flex justify-center items-center w-full min-h-[calc(100vh-360px)]">
-      <div style={{ width: "100%", height: "400px" }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={teachersRating}
-            margin={{
-              top: 20,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="title" />
-            <YAxis />
-            <Bar
-              dataKey="averageRating"
-              fill="#8884d8"
-              shape={<TriangleBar />}
-              label={{ position: "top" }}
+    <div>
+      <div className="my-5">
+        <SectionHeader title={"Progress Chart"} />
+      </div>
+      <div className="flex justify-center items-center w-full min-h-[calc(100vh-360px)]">
+        <div style={{ width: "100%", height: "400px" }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={teachersRating}
+              margin={{
+                top: 20,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
             >
-              {teachersRating.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={colors[index % colors.length]}
-                />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="title" />
+              <YAxis />
+              <Bar
+                dataKey="averageRating"
+                fill="#8884d8"
+                shape={<TriangleBar />}
+                label={{ position: "top" }}
+              >
+                {teachersRating.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={colors[index % colors.length]}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );

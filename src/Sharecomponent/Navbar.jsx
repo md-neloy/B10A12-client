@@ -99,8 +99,10 @@ const Navbar = () => {
     </>
   );
   const { user, logOut, togol, setTogol } = useContexHooks();
-  const handleChange = () => {
-    setTogol(!togol);
+  const handleChange = (e) => {
+    const isChecked = e.target.checked;
+    localStorage.setItem("smartLearningTheme", isChecked);
+    setTogol(isChecked);
     // localStorage.setItem("darkMode", !togol);
   };
   console.log(togol);
@@ -208,7 +210,11 @@ const Navbar = () => {
             )}
             <div>
               <label className="swap swap-rotate w-7 md:w-fit">
-                <input type="checkbox" onChange={handleChange} />
+                <input
+                  type="checkbox"
+                  checked={togol}
+                  onChange={handleChange}
+                />
 
                 <svg
                   className="swap-off h-10 w-10 fill-current"
