@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import {
   BarChart,
   Bar,
@@ -7,53 +8,10 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import useAxiosSecure from "../../../useHooks/useAxiosSecure";
+import PreLoader from "../../../components/PreLoader";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
-
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
 
 const getPath = (x, y, width, height) => {
   return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${
@@ -73,12 +31,24 @@ const TriangleBar = (props) => {
 };
 
 const GraphCart = () => {
+  const axiosSecure = useAxiosSecure();
+  const { data: teachersRating, isLoading } = useQuery({
+    queryKey: "teachersRating",
+    queryFn: async () => {
+      const res = await axiosSecure.get("/allTeachers-Rating");
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <PreLoader />;
+  }
   return (
     <div className="flex justify-center items-center w-full min-h-[calc(100vh-360px)]">
       <div style={{ width: "100%", height: "400px" }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            data={data}
+            data={teachersRating}
             margin={{
               top: 20,
               right: 30,
@@ -87,16 +57,19 @@ const GraphCart = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="title" />
             <YAxis />
             <Bar
-              dataKey="uv"
+              dataKey="averageRating"
               fill="#8884d8"
               shape={<TriangleBar />}
               label={{ position: "top" }}
             >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+              {teachersRating.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={colors[index % colors.length]}
+                />
               ))}
             </Bar>
           </BarChart>
