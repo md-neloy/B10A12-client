@@ -53,7 +53,7 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <div className="my-4">
       <Helmet>
         <title>SmartLearning | Contact info</title>
       </Helmet>

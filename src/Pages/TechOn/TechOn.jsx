@@ -12,7 +12,7 @@ import PreLoader from "../../components/PreLoader";
 import useAdmin from "../../privateRouts/useAdmin";
 
 const TeachOn = () => {
-  const { user } = useContexHooks();
+  const { user, togol } = useContexHooks();
   const axiosSecure = useAxiosSecure();
   const [isAdmin] = useAdmin();
 
@@ -104,7 +104,11 @@ const TeachOn = () => {
   }
 
   return (
-    <div className="bg-base-200 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div
+      className={`${
+        togol ? "bg-base-200" : "bg-[#111827]"
+      } min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8`}
+    >
       <Helmet>
         <title>SmartLearning | Teach on</title>
       </Helmet>
