@@ -24,6 +24,7 @@ import TeacherSeeDetails from "../Pages/Dashboard/dashboardPages/TeacherSeeDetai
 import EnrollAssignmentTable from "../components/EnrollAssignmentTable";
 import Contact from "../components/Contact";
 import AboutUs from "../components/AboutUs";
+import GraphCart from "../Pages/Dashboard/dashboardPages/GraphCart";
 
 const router = createBrowserRouter([
   {
@@ -161,6 +162,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <TeacherRq />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "graphchart",
+        element: (
+          <AdminRoute>
+            <GraphCart />
           </AdminRoute>
         ),
       },

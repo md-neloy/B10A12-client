@@ -5,6 +5,7 @@ import AdminMenu from "../menus/AdminMenu";
 import TeacherMenu from "../menus/TeacherMenu";
 import StudentMenu from "../menus/StudentMenu";
 import useTeacher from "../../../privateRouts/useTeacher";
+import { LuChartNoAxesCombined } from "react-icons/lu";
 
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
@@ -34,6 +35,14 @@ const Sidebar = () => {
               <FaUser /> Profile
             </NavLink>
           </li>
+          {isAdmin && (
+            <li>
+              <NavLink to="/dashboard/graphchart">
+                <LuChartNoAxesCombined />
+                Progress Chart
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>
