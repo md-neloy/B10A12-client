@@ -9,7 +9,7 @@ const Dashboard = () => {
         {/* Left Side: Sidebar Component */}
         <Sidebar />
         {/* Right Side: Dashboard Dynamic Content */}
-        <div className="w-full md:flex-1">
+        <div className="w-full md:flex-1 min-h-[calc(100vh-360px)]">
           <div>
             {/* Outlet for dynamic contents */}
             <Outlet />
