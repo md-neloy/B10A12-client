@@ -41,7 +41,7 @@ const Navbar = () => {
           end
           className={({ isActive }) =>
             isActive
-              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#F66B1D]"
               : "text-black md:text-white hover:text-yellow-400 font-bold"
           }
         >
@@ -53,7 +53,7 @@ const Navbar = () => {
           to="/allclasses"
           className={({ isActive }) =>
             isActive
-              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#F66B1D]"
               : "text-black md:text-white hover:text-yellow-400 font-bold"
           }
         >
@@ -65,7 +65,7 @@ const Navbar = () => {
           to="/techon"
           className={({ isActive }) =>
             isActive
-              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#F66B1D]"
               : "text-black md:text-white hover:text-yellow-400 font-bold"
           }
         >
@@ -77,7 +77,7 @@ const Navbar = () => {
           to="/aboutUs"
           className={({ isActive }) =>
             isActive
-              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#F66B1D]"
               : "text-black md:text-white hover:text-yellow-400 font-bold"
           }
         >
@@ -89,7 +89,7 @@ const Navbar = () => {
           to={"/contact"}
           className={({ isActive }) =>
             isActive
-              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#4CAF50]"
+              ? "!text-white hover:!text-yellow-400 font-bold !bg-[#F66B1D]"
               : "text-black md:text-white hover:text-yellow-400 font-bold"
           }
         >
@@ -174,7 +174,7 @@ const Navbar = () => {
                         "Anonymous User"}
                     </p>
                     <ul className="menu menu-vertical p-0">
-                      <li className="!bg-[#4CAF50] border-[1px] border-solid border-white rounded-lg">
+                      <li className="!bg-[#F66B1D] border-[1px] border-solid border-white rounded-lg">
                         <NavLink to={"/dashboard/profile"} className={"w-full"}>
                           Dashboard
                         </NavLink>

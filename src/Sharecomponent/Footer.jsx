@@ -17,8 +17,8 @@ const Footer = () => {
           <footer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Logo and About Section */}
             <div>
-              <h2 className="text-3xl font-bold text-yellow-400">
-                <span className="text-[#4CAF50]">Smart</span>Learning
+              <h2 className="text-3xl font-bold text-yellow-500">
+                <span className="text-[#F66B1D]">Smart</span>Learning
               </h2>
               <p className="mt-4 text-gray-300">
                 Empowering learners with knowledge and skills through a modern,

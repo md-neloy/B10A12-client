@@ -8,7 +8,7 @@ const AllClassesCard = ({ item }) => {
         className="card card-compact bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl w-full h-full  relative"
         data-aos="zoom-in"
       >
-        <span className="absolute top-2 right-4 text-white font-bold text-xl bg-[#388E3C] rounded-md p-2">
+        <span className="absolute top-2 right-4 text-white font-bold text-xl bg-[#F66B1D] rounded-md p-2">
           Enroll: {item.enroll}
         </span>
         <figure>

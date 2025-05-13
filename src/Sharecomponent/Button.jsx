@@ -14,7 +14,7 @@ const Button = ({
       style={{
         width: width,
       }}
-      className={`bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center`}
+      className={`bg-[#F66B1D] hover:bg-[#f6501d]  text-white px-6 py-3 rounded-lg text-lg font-medium transition-all text-center`}
     >
       <div className="flex justify-center items-center gap-3">
         {logo} {text}
