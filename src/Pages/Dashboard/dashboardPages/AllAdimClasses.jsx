@@ -91,8 +91,8 @@ const AllAdminClasses = () => {
       </Helmet>
       {/* Table */}
       <div className="overflow-x-auto max-w-full">
-        <table className="table-auto w-full border-collapse bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl border-2 border-green-600">
-          <thead className="bg-[#4CAF50] text-gray-700">
+        <table className="table-auto w-full border-collapse bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl border-2 border-yellow-500">
+          <thead className="bg-[#F66B1D] text-gray-700">
             <tr>
               <th className="px-4 py-3 text-left">Title</th>
               <th className="px-4 py-3 text-left">Image</th>

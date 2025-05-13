@@ -87,7 +87,7 @@ const Allusers = () => {
         />
         <button
           onClick={onSearch}
-          className="bg-[#4CAF50] hover:bg-[#388E3C]  text-white px-4 py-2 rounded-lg text-lg font-medium transition-all text-center"
+          className="bg-[#F66B1D] hover:bg-[#f65b1d]  text-white px-4 py-2 rounded-lg text-lg font-medium transition-all text-center"
         >
           Search
         </button>
@@ -95,9 +95,9 @@ const Allusers = () => {
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="table-auto w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl rounded-lg border border-green-600">
+        <table className="table-auto w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl rounded-lg border border-yellow-500">
           {/* Table Header */}
-          <thead className="bg-[#4CAF50]">
+          <thead className="bg-[#F66B1D]">
             <tr>
               <th className="px-4 py-3 text-left text-gray-700">User Name</th>
               <th className="px-4 py-3 text-left text-gray-700">User Email</th>

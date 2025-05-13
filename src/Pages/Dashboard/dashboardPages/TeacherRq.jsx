@@ -92,9 +92,9 @@ const TeacherRq = () => {
         <title>SmartLearning | Teacher Rq</title>
       </Helmet>
       <div className="overflow-x-auto">
-        <table className="table-auto w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl border-2 border-green-600">
+        <table className="table-auto w-full bg-gradient-to-r from-indigo-100 via-purple-50 to-indigo-100 shadow-xl border-2 border-yellow-500">
           {/* Table Header */}
-          <thead className="bg-[#4CAF50]">
+          <thead className="bg-[#F66B1D]">
             <tr>
               <th className="px-4 py-3 text-left text-gray-700">Name</th>
               <th className="px-4 py-3 text-left text-gray-700">Image</th>

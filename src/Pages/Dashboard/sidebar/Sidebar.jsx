@@ -12,8 +12,8 @@ const Sidebar = () => {
   const [isTeacher] = useTeacher();
   return (
     <div>
-      <div className="w-full md:w-64 h-full bg-[#4CAF50]">
-        <ul className="menu">
+      <div className="w-full md:w-64 h-full bg-[#F66B1D]">
+        <ul className="menu text-[#000000]">
           {isAdmin ? (
             <AdminMenu />
           ) : isTeacher ? (
@@ -24,7 +24,7 @@ const Sidebar = () => {
         </ul>
         {/* share common NavLink */}
         <div className="divider"></div>
-        <ul className="menu">
+        <ul className="menu text-[#000000]">
           <li>
             <NavLink to={"/"}>
               <FaHome /> Home
